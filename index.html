@@ -247,7 +247,7 @@
   .hero-center {
     text-align: center;
     margin: auto;
-    padding: 40px 20px 60px;
+    padding: 40px 44px 60px 76px;
     max-width: 960px;
   }
 
@@ -261,8 +261,9 @@
 
   .hero-sub {
     font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 3px;
+    font-size: clamp(0.76rem, 1.15vw, 0.96rem);
+    letter-spacing: 2.5px;
+    line-height: 1.75;
     text-transform: uppercase;
     color: var(--dim-grey);
     margin-bottom: 34px;
@@ -881,6 +882,7 @@
     }
     .rail-progress, .rail-pill { display: none; }
     .container, .header-bar { width: 92%; padding-left: 0; }
+    .hero-center { padding: 36px 20px 56px; }
     .header-right .top-link { display: none; }
     .site-footer { padding-bottom: 84px; }
   }
