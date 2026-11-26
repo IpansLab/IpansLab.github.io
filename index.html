@@ -24,11 +24,11 @@
     --indigo-frame: #6d69c5;
     --link-violet: #685cec;
     --link-hover: #413996;
-    --rail-w: 58px;
+    --crimson-ink: #e11d48;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
 
   body {
     background: var(--creamy-white);
@@ -36,7 +36,7 @@
     font-family: 'Lora', Georgia, serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .sans { font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -60,7 +60,7 @@
 
   .slim-rail.on-dark {
     color: var(--creamy-white);
-    border-left-color: rgba(247, 247, 239, 0.2);
+    border-left-color: rgba(247, 247, 239, 0.22);
   }
 
   .rail-progress {
@@ -70,7 +70,7 @@
     width: 2px;
     height: 0%;
     background: currentColor;
-    transition: height 0.15s ease-out;
+    transition: height 0.12s ease-out;
   }
 
   .rail-btn {
@@ -91,10 +91,7 @@
     transition: opacity 0.18s ease, transform 0.18s ease;
   }
 
-  .rail-btn:hover, .rail-btn.active {
-    opacity: 1;
-    transform: translateX(2px);
-  }
+  .rail-btn:hover, .rail-btn.active { opacity: 1; transform: translateX(2px); }
 
   .rail-pill {
     position: absolute;
@@ -114,17 +111,10 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.18);
   }
 
-  .slim-rail.on-dark .rail-pill {
-    background: var(--creamy-white);
-    color: var(--rich-black);
-  }
+  .slim-rail.on-dark .rail-pill { background: var(--creamy-white); color: var(--rich-black); }
+  .rail-btn:hover .rail-pill { opacity: 1; transform: translateX(0); }
 
-  .rail-btn:hover .rail-pill {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* Full-Screen Menu Overlay (ollivere.co style) */
+  /* Full-Screen Menu Overlay */
   .menu-overlay {
     position: fixed;
     inset: 0;
@@ -157,27 +147,29 @@
     line-height: 1.3;
     cursor: pointer;
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
   }
 
-  .menu-link:hover { transform: translateX(10px); opacity: 0.72; }
+  .menu-link:hover { transform: translateX(12px); opacity: 0.75; }
 
   /* Header & Containers */
   .container {
     width: 86%;
     max-width: 1240px;
     margin: 0 auto;
-    padding-left: 36px;
+    padding-left: 44px;
   }
 
   .header-bar {
     width: 88%;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 34px 0 24px 36px;
+    padding: 32px 0 18px 44px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 20;
   }
 
   .wordmark-btn {
@@ -187,13 +179,28 @@
     padding: 0;
     display: inline-flex;
     align-items: center;
+    position: relative;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+  .wordmark-btn:hover { transform: rotate(-2deg) scale(1.04); }
+
+  .spark-pop {
+    position: fixed;
+    pointer-events: none;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    z-index: 400;
+    animation: sparkFly 0.85s ease-out forwards;
   }
+
+  @keyframes sparkFly {
+    0% { opacity: 1; transform: translate(0, 0) scale(0.7) rotate(0deg); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.25) rotate(var(--rot)); }
+  }
+
+  .header-right { display: flex; align-items: center; gap: 24px; }
 
   .top-link {
     font-family: 'Lato', sans-serif;
@@ -202,7 +209,7 @@
     text-transform: uppercase;
     color: var(--rich-black);
     text-decoration: none;
-    opacity: 0.7;
+    opacity: 0.72;
     transition: opacity 0.18s ease;
   }
 
@@ -216,47 +223,56 @@
     font-size: 1.2rem;
     font-weight: 500;
     cursor: pointer;
-    position: relative;
     padding-bottom: 4px;
     border-bottom: 2px solid var(--rich-black);
-    transition: opacity 0.18s ease;
+    transition: transform 0.2s ease, opacity 0.18s ease;
   }
 
-  .menu-trigger:hover { opacity: 0.65; }
+  .menu-trigger:hover { opacity: 0.65; transform: translateY(-1px); }
 
-  /* Theme Bands */
-  .band-cream {
-    background: var(--creamy-white);
-    color: var(--rich-black);
+  .band-cream { background: var(--creamy-white); color: var(--rich-black); }
+  .band-dark { background: var(--rich-black); color: var(--creamy-white); }
+
+  /* 01 FUN ELEMENT: Sticky Scroll-Scrubbed Hero */
+  .hero-stage {
+    height: 175vh;
+    position: relative;
   }
 
-  .band-dark {
-    background: var(--rich-black);
-    color: var(--creamy-white);
-  }
-
-  /* 01 Hero */
-  .hero-sec {
-    min-height: 90vh;
+  .hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-bottom: 44px;
+    padding-bottom: 36px;
+    overflow: hidden;
   }
 
   .hero-center {
     text-align: center;
     margin: auto;
-    padding: 40px 44px 60px 76px;
-    max-width: 960px;
+    padding: 20px 44px 48px 76px;
+    max-width: 980px;
+    position: relative;
   }
 
   .hero-title {
     font-size: clamp(3rem, 6.8vw, 5.4rem);
     font-weight: 600;
-    line-height: 1.16;
+    line-height: 1.14;
     letter-spacing: -0.025em;
-    margin-bottom: 26px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .swoosh-wrap {
+    width: min(460px, 78%);
+    margin: 0 auto 18px;
+    height: 44px;
+    position: relative;
   }
 
   .hero-sub {
@@ -266,7 +282,7 @@
     line-height: 1.75;
     text-transform: uppercase;
     color: var(--dim-grey);
-    margin-bottom: 34px;
+    margin-bottom: 28px;
   }
 
   .hero-cue {
@@ -274,21 +290,37 @@
     font-family: 'Lora', serif;
     font-size: 1.05rem;
     color: var(--rich-black);
-    text-decoration: none;
+    border: none;
     border-bottom: 1px solid rgba(37,34,34,0.35);
     padding-bottom: 3px;
     cursor: pointer;
     background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    transition: opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
-  .hero-cue:hover { opacity: 0.6; }
+  .hero-cue:hover { opacity: 0.65; transform: translateY(2px); }
 
-  /* 02 Intro & Portrait (Dark Band) */
-  .intro-sec { padding: 110px 0 100px; }
+  /* Cheeky Hero Dino */
+  .hero-dino-box {
+    position: absolute;
+    right: -18px;
+    bottom: -14px;
+    width: 148px;
+    pointer-events: none;
+    transform-origin: center bottom;
+    will-change: transform;
+    z-index: 3;
+  }
+
+  @keyframes eyeBlink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    96% { transform: scaleY(0.1); }
+  }
+
+  .dino-eye-blink { transform-box: fill-box; transform-origin: center; animation: eyeBlink 4.2s infinite; }
+
+  /* 02 Intro & Multi-Layer Parallax Institution Cloud */
+  .intro-sec { padding: 110px 0 96px; overflow: hidden; }
 
   .intro-statement {
     font-size: clamp(1.65rem, 2.75vw, 2.25rem);
@@ -306,7 +338,7 @@
     gap: 56px;
     align-items: center;
     max-width: 1000px;
-    margin: 0 auto 72px;
+    margin: 0 auto 76px;
   }
 
   .portrait-frame {
@@ -328,48 +360,96 @@
 
   .portrait-frame img:hover { transform: scale(1.02); }
 
-  .stat-list {
+  .stat-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 28px; }
+  .stat-item { border-top: 1px solid rgba(247, 247, 239, 0.18); padding-top: 16px; }
+  .stat-num { font-family: 'Lora', serif; font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 600; line-height: 1.1; margin-bottom: 6px; }
+  .stat-desc { font-family: 'Lato', sans-serif; font-size: 0.9rem; color: rgba(247, 247, 239, 0.72); line-height: 1.5; }
+
+  .parallax-cloud {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 28px;
+    gap: 22px;
+    padding-top: 34px;
+    border-top: 1px solid rgba(247, 247, 239, 0.12);
+    text-align: center;
   }
 
-  .stat-item {
-    border-top: 1px solid rgba(247, 247, 239, 0.18);
-    padding-top: 16px;
-  }
-
-  .stat-num {
-    font-family: 'Lora', serif;
-    font-size: clamp(2rem, 3vw, 2.6rem);
-    font-weight: 600;
-    line-height: 1.1;
-    margin-bottom: 6px;
-  }
-
-  .stat-desc {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.9rem;
-    color: rgba(247, 247, 239, 0.72);
-    line-height: 1.5;
-  }
-
-  .inst-strip {
+  .cloud-layer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px 38px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(247, 247, 239, 0.12);
+    gap: 16px 42px;
     font-family: 'Lato', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 2.5px;
+    letter-spacing: 2.8px;
     text-transform: uppercase;
-    color: rgba(247, 247, 239, 0.48);
+    will-change: transform;
   }
 
-  /* 03 Focus / Capabilities (Cream Band) */
-  .focus-sec { padding: 118px 0 110px; }
+  .cloud-layer.l1 { font-size: 0.88rem; color: rgba(247, 247, 239, 0.88); font-weight: 700; }
+  .cloud-layer.l2 { font-size: 0.8rem; color: rgba(247, 247, 239, 0.55); }
+  .cloud-layer.l3 { font-size: 0.74rem; color: rgba(247, 247, 239, 0.34); }
+
+  /* FUN ELEMENT 3: Scroll-Driven Horizontal "Math & Code Express" Train */
+  .train-stage {
+    height: 215vh;
+    position: relative;
+  }
+
+  .train-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 80px 0 42px;
+    overflow: hidden;
+  }
+
+  .train-statement {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.48;
+    text-align: center;
+    max-width: 780px;
+    margin: auto;
+    padding: 0 28px 0 64px;
+  }
+
+  .train-viewport {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding-top: 18px;
+  }
+
+  .train-track-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 14px;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--rich-black) 0 18px, transparent 18px 28px);
+    opacity: 0.35;
+  }
+
+  .train-runner {
+    display: inline-block;
+    will-change: transform;
+    padding-bottom: 14px;
+  }
+
+  @keyframes steamDrift {
+    0% { opacity: 0; transform: translateY(6px) scale(0.7); }
+    40% { opacity: 0.85; }
+    100% { opacity: 0; transform: translateY(-22px) translateX(-14px) scale(1.25); }
+  }
+
+  .steam-sym { animation: steamDrift 2.6s ease-out infinite; }
+  .steam-sym.d2 { animation-delay: 0.85s; }
+  .steam-sym.d3 { animation-delay: 1.7s; }
+
+  /* 03 Focus / Capabilities (Animated Hover Icons) */
+  .focus-sec { padding: 110px 0 110px; }
 
   .section-heading-center {
     font-size: clamp(2rem, 3.2vw, 2.75rem);
@@ -394,7 +474,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 64px 56px;
+    gap: 60px 56px;
   }
 
   .focus-item {
@@ -402,33 +482,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
+  .focus-item:hover { transform: translateY(-4px); }
+
   .focus-icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 22px;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 20px;
     stroke: var(--rich-black);
     fill: none;
     stroke-width: 1.6;
     stroke-linecap: round;
     stroke-linejoin: round;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .focus-item h3 {
-    font-size: 1.35rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
+  .focus-item:hover .focus-icon { transform: scale(1.12) rotate(-4deg); }
+  .focus-item:nth-child(even):hover .focus-icon { transform: scale(1.12) rotate(4deg); }
 
-  .focus-item p {
-    font-size: 1.02rem;
-    color: var(--dim-grey);
-    line-height: 1.7;
-    max-width: 34ch;
-  }
+  .focus-item h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 10px; }
+  .focus-item p { font-size: 1.02rem; color: var(--dim-grey); line-height: 1.7; max-width: 34ch; }
 
-  /* 04 Work / Research Summaries (Dark Band) */
+  /* 04 Work / Research Summaries (Dark Band — Simple Summaries + Springy Arrows) */
   .work-sec { padding: 118px 0 128px; }
 
   .work-intro {
@@ -440,16 +517,15 @@
     line-height: 1.38;
   }
 
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5.5vw 4.2vw;
-  }
+  .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5.5vw 4.2vw; }
 
   .project-card {
     display: flex;
     flex-direction: column;
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+
+  .project-card:hover { transform: translateY(-6px); }
 
   .project-thumb {
     border-radius: 10px;
@@ -472,7 +548,6 @@
 
   .project-thumb img:hover { transform: scale(1.03); }
 
-  /* Colored Typographic Showcase Frames matching Ollivere's Goozby (#0b474c) & Reflection (#6d69c5) */
   .showcase-panel {
     width: 100%;
     height: 100%;
@@ -485,189 +560,111 @@
 
   .showcase-panel.teal { background: var(--teal-frame); }
   .showcase-panel.indigo { background: var(--indigo-frame); }
+  .showcase-eyebrow { font-family: 'Lato', sans-serif; font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.82; }
+  .showcase-display { font-family: 'Lora', serif; font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 500; line-height: 1.3; }
+  .showcase-meta { font-family: 'Lato', sans-serif; font-size: 0.9rem; opacity: 0.88; border-top: 1px solid rgba(247, 247, 239, 0.25); padding-top: 12px; }
 
-  .showcase-eyebrow {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
-
-  .showcase-display {
-    font-family: 'Lora', serif;
-    font-size: clamp(1.45rem, 2.2vw, 1.9rem);
-    font-weight: 500;
-    line-height: 1.3;
-  }
-
-  .showcase-meta {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.9rem;
-    opacity: 0.88;
-    border-top: 1px solid rgba(247, 247, 239, 0.25);
-    padding-top: 12px;
-  }
-
-  .project-card h3 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: var(--creamy-white);
-  }
-
-  .project-desc {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgba(247, 247, 239, 0.82);
-    margin-bottom: 12px;
-  }
-
-  .project-tags {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.875rem;
-    color: var(--tag-grey);
-    margin-bottom: 12px;
-  }
+  .project-card h3 { font-size: 1.5rem; font-weight: 500; margin-bottom: 10px; color: var(--creamy-white); }
+  .project-desc { font-size: 1.05rem; line-height: 1.7; color: rgba(247, 247, 239, 0.82); margin-bottom: 12px; }
+  .project-tags { font-family: 'Lato', sans-serif; font-size: 0.875rem; color: var(--tag-grey); margin-bottom: 12px; }
 
   .project-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-family: 'Lora', serif;
     font-size: 1.08rem;
     font-weight: 500;
     color: var(--creamy-white);
     text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
     width: fit-content;
   }
 
-  .project-link:hover { transform: translateX(6px); opacity: 0.8; }
+  .spring-arrow {
+    width: 34px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 
-  /* 05 Speaking & Endorsements (Cream Band, Staggered 2-Column) */
-  .speaking-sec { padding: 128px 0 90px; }
+  .project-link:hover .spring-arrow { transform: translateX(9px) scaleX(1.18); }
+
+  /* 05 Speaking & Scrolling Highlights Ribbon */
+  .speaking-sec { padding: 128px 0 76px; overflow: hidden; }
 
   .stagger-grid {
     max-width: 960px;
-    margin: 0 auto;
+    margin: 0 auto 92px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 56px 72px;
     align-items: start;
   }
 
-  .stagger-col-right { margin-top: 110px; }
+  .stagger-col-right { margin-top: 105px; }
+  .quote-block { margin-bottom: 48px; }
+  .quote-text { font-size: 1.28rem; line-height: 1.75; color: var(--rich-black); margin-bottom: 18px; }
+  .quote-name { font-family: 'Lato', sans-serif; font-size: 1.02rem; letter-spacing: 3px; text-transform: uppercase; color: var(--rich-black); }
+  .quote-role { font-family: 'Lato', sans-serif; font-size: 0.94rem; letter-spacing: 0.4px; color: var(--dim-grey); margin-top: 6px; }
 
-  .quote-block {
-    margin-bottom: 48px;
-  }
-
-  .quote-text {
-    font-size: 1.28rem;
-    line-height: 1.75;
-    color: var(--rich-black);
-    margin-bottom: 18px;
-  }
-
-  .quote-name {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.02rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--rich-black);
-  }
-
-  .quote-role {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.94rem;
-    letter-spacing: 0.4px;
-    color: var(--dim-grey);
-    margin-top: 6px;
-  }
-
-  .speak-photo {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 30px 38px -23px rgba(0, 0, 0, 0.28);
-    margin-bottom: 18px;
-  }
-
-  .speak-photo img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    display: block;
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-  }
-
+  .speak-photo { border-radius: 10px; overflow: hidden; box-shadow: 0 30px 38px -23px rgba(0, 0, 0, 0.28); margin-bottom: 18px; }
+  .speak-photo img { width: 100%; height: 240px; object-fit: cover; display: block; cursor: zoom-in; transition: transform 0.3s ease; }
   .speak-photo img:hover { transform: scale(1.02); }
+  .speak-caption { font-size: 1.02rem; color: var(--dim-grey); line-height: 1.7; }
 
-  .speak-caption {
-    font-size: 1.02rem;
-    color: var(--dim-grey);
-    line-height: 1.7;
-  }
-
-  /* 06 Credentials (Cream Band, Hairline Editorial Ledger) */
-  .cred-sec {
-    padding: 72px 0 100px;
-    border-top: 1px solid rgba(37, 34, 34, 0.12);
-  }
-
-  .ledger-grid {
-    max-width: 960px;
-    margin: 0 auto;
+  /* Opposite-Scrolling Highlights Ribbon (Ollivere .tweets style) */
+  .ribbon-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding: 16px 0 42px;
     display: grid;
-    gap: 0;
+    gap: 24px;
   }
 
-  .ledger-row {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 28px;
-    padding: 28px 0;
-    border-bottom: 1px solid rgba(37, 34, 34, 0.12);
+  .ribbon-row {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    will-change: transform;
   }
 
-  .ledger-label {
+  .ribbon-card {
+    width: 340px;
+    flex-shrink: 0;
+    background: var(--creamy-white);
+    border: 1.5px solid rgba(37, 34, 34, 0.14);
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 24px 32px -20px rgba(0, 0, 0, 0.24);
+  }
+
+  .ribbon-card .rc-tag {
     font-family: 'Lato', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 3px;
+    font-size: 0.72rem;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--dim-grey);
-    padding-top: 4px;
+    margin-bottom: 8px;
   }
 
-  .ledger-body {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    display: grid;
-    gap: 10px;
-  }
+  .ribbon-card p { font-size: 0.98rem; line-height: 1.55; color: var(--rich-black); }
 
-  .ledger-body a {
-    color: var(--link-violet);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(104, 92, 236, 0.35);
-  }
-
+  /* 06 Credentials (Hairline Editorial Ledger) */
+  .cred-sec { padding: 72px 0 96px; border-top: 1px solid rgba(37, 34, 34, 0.12); }
+  .ledger-grid { max-width: 960px; margin: 0 auto; display: grid; }
+  .ledger-row { display: grid; grid-template-columns: 220px 1fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid rgba(37, 34, 34, 0.12); }
+  .ledger-label { font-family: 'Lato', sans-serif; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; color: var(--dim-grey); padding-top: 4px; }
+  .ledger-body { font-size: 1.05rem; line-height: 1.75; display: grid; gap: 10px; }
+  .ledger-body a { color: var(--link-violet); text-decoration: none; border-bottom: 1px solid rgba(104, 92, 236, 0.35); }
   .ledger-body a:hover { color: var(--link-hover); }
 
-  /* 07 CTA + Peeking Eyes + Footer */
-  .cta-sec {
-    padding: 96px 0 0;
-    text-align: center;
-    position: relative;
-  }
-
-  .cta-lead {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    max-width: 620px;
-    margin: 0 auto 38px;
-    line-height: 1.5;
-  }
+  /* 07 CTA + Peeking Dino Mascot + Footer */
+  .cta-sec { padding: 88px 0 0; text-align: center; position: relative; }
+  .cta-lead { font-size: clamp(1.5rem, 2.5vw, 2rem); max-width: 620px; margin: 0 auto 38px; line-height: 1.5; }
 
   .cta-button-1 {
     display: inline-block;
@@ -695,208 +692,130 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 24px;
-    margin-bottom: 64px;
+    margin-bottom: 36px;
     font-family: 'Lato', sans-serif;
     font-size: 0.9rem;
     color: var(--dim-grey);
   }
 
   .cta-sublinks button, .cta-sublinks a {
+    background: none; border: none; font-family: inherit; font-size: inherit;
+    color: var(--rich-black); text-decoration: underline; text-underline-offset: 4px; cursor: pointer;
+  }
+
+  /* Peeking Hand-Drawn Dino Mascot with Wagging Tail & Click Quips */
+  .peeker-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 158px;
+    overflow: visible;
+  }
+
+  .dino-bubble {
+    position: absolute;
+    bottom: 142px;
+    background: var(--creamy-white);
+    color: var(--rich-black);
+    border: 2.5px solid var(--rich-black);
+    border-radius: 14px;
+    padding: 8px 16px;
+    font-family: 'Lora', serif;
+    font-size: 0.96rem;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.16);
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    z-index: 15;
+  }
+
+  .dino-bubble.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .peeker-dino-btn {
     background: none;
     border: none;
-    font-family: inherit;
-    font-size: inherit;
-    color: var(--rich-black);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    padding: 0;
     cursor: pointer;
+    display: block;
+    line-height: 0;
   }
 
-  /* Subtle Cursor-Tracking Peeking Character above Footer */
-  .peeker-wrap {
-    display: flex;
-    justify-content: center;
-    height: 78px;
-    overflow: hidden;
+  @keyframes tailWag {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(9deg); }
   }
 
-  .peeker-head {
-    width: 150px;
-    height: 92px;
-    background: var(--rich-black);
-    border-radius: 76px 76px 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding-top: 14px;
+  .dino-tail {
+    transform-origin: 205px 145px;
+    animation: tailWag 1.8s ease-in-out infinite;
   }
 
-  .eyeball {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--creamy-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .pupil {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--rich-black);
-    transition: transform 0.08s linear;
-  }
+  .peeker-dino-btn:hover .dino-tail { animation-duration: 0.45s; }
 
   /* Footer */
-  .site-footer {
-    background: var(--rich-black);
-    color: var(--creamy-white);
-    padding: 64px 0 46px;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr 1fr;
-    gap: 36px;
-    margin-bottom: 72px;
-  }
-
-  .footer-col h4 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-    color: var(--creamy-white);
-  }
-
+  .site-footer { background: var(--rich-black); color: var(--creamy-white); padding: 64px 0 46px; position: relative; z-index: 5; }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 72px; }
+  .footer-col h4 { font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; color: var(--creamy-white); }
   .footer-col a, .footer-col button {
-    display: block;
-    background: none;
-    border: none;
-    text-align: left;
-    font-family: 'Lora', serif;
-    font-size: 1.08rem;
-    color: #9e9c94;
-    text-decoration: none;
-    padding: 4px 0;
-    cursor: pointer;
-    transition: color 0.16s ease;
+    display: block; background: none; border: none; text-align: left;
+    font-family: 'Lora', serif; font-size: 1.08rem; color: #9e9c94;
+    text-decoration: none; padding: 4px 0; cursor: pointer; transition: color 0.16s ease;
   }
-
   .footer-col a:hover, .footer-col button:hover { color: var(--creamy-white); }
-
-  .copyright-line {
-    font-family: 'Lato', sans-serif;
-    font-size: 0.88rem;
-    color: var(--dim-grey);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 12px;
-  }
+  .copyright-line { font-family: 'Lato', sans-serif; font-size: 0.88rem; color: var(--dim-grey); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
   /* Lightbox */
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(22, 20, 20, 0.88);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 500;
-    padding: 24px;
-  }
-
+  .lightbox { position: fixed; inset: 0; background: rgba(22, 20, 20, 0.88); display: none; align-items: center; justify-content: center; z-index: 500; padding: 24px; }
   .lightbox.open { display: flex; }
+  .lightbox-box { max-width: 880px; width: 100%; background: var(--creamy-white); color: var(--rich-black); border-radius: 12px; padding: 14px; }
+  .lightbox-box img { width: 100%; max-height: 75vh; object-fit: contain; border-radius: 8px; background: #1a1818; display: block; }
+  .lightbox-foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 12px; font-family: 'Lato', sans-serif; font-size: 0.9rem; color: var(--dim-grey); }
+  .lightbox-close { border: 1.5px solid var(--rich-black); background: transparent; color: var(--rich-black); border-radius: 999px; padding: 5px 14px; font-family: 'Lato', sans-serif; font-size: 0.8rem; cursor: pointer; }
 
-  .lightbox-box {
-    max-width: 880px;
-    width: 100%;
-    background: var(--creamy-white);
-    color: var(--rich-black);
-    border-radius: 12px;
-    padding: 14px;
-  }
-
-  .lightbox-box img {
-    width: 100%;
-    max-height: 75vh;
-    object-fit: contain;
-    border-radius: 8px;
-    background: #1a1818;
-    display: block;
-  }
-
-  .lightbox-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding-top: 12px;
-    font-family: 'Lato', sans-serif;
-    font-size: 0.9rem;
-    color: var(--dim-grey);
-  }
-
-  .lightbox-close {
-    border: 1.5px solid var(--rich-black);
-    background: transparent;
-    color: var(--rich-black);
-    border-radius: 999px;
-    padding: 5px 14px;
-    font-family: 'Lato', sans-serif;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-
-  /* Responsive */
   @media (max-width: 900px) {
-    .container, .header-bar { width: 92%; padding-left: 28px; }
+    .container, .header-bar { width: 92%; padding-left: 36px; }
     .about-split, .focus-grid, .work-grid, .stagger-grid, .footer-grid { grid-template-columns: 1fr; }
     .focus-grid { width: 100%; gap: 44px; }
     .stagger-col-right { margin-top: 0; }
     .ledger-row { grid-template-columns: 1fr; gap: 8px; }
+    .hero-dino-box { width: 112px; right: 0; }
   }
 
   @media (max-width: 640px) {
     .slim-rail {
-      top: auto;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      transform: none;
-      flex-direction: row;
-      justify-content: space-around;
-      padding: 8px 10px;
-      border-left: none;
-      border-top: 1px solid rgba(37, 34, 34, 0.16);
-      background: rgba(247, 247, 239, 0.94);
-      backdrop-filter: blur(8px);
+      top: auto; left: 0; right: 0; bottom: 0; transform: none;
+      flex-direction: row; justify-content: space-around;
+      padding: 8px 10px; border-left: none; border-top: 1px solid rgba(37, 34, 34, 0.16);
+      background: rgba(247, 247, 239, 0.94); backdrop-filter: blur(8px);
     }
-    .slim-rail.on-dark {
-      background: rgba(37, 34, 34, 0.94);
-      border-top-color: rgba(247, 247, 239, 0.18);
-    }
+    .slim-rail.on-dark { background: rgba(37, 34, 34, 0.94); border-top-color: rgba(247, 247, 239, 0.18); }
     .rail-progress, .rail-pill { display: none; }
     .container, .header-bar { width: 92%; padding-left: 0; }
-    .hero-center { padding: 36px 20px 56px; }
+    .hero-center { padding: 24px 20px 56px; }
+    .train-statement { padding: 0 20px; }
     .header-right .top-link { display: none; }
+    .hero-dino-box { display: none; }
     .site-footer { padding-bottom: 84px; }
   }
 
   @media print {
-    .slim-rail, .menu-overlay, .header-right, .peeker-wrap, .lightbox { display: none !important; }
+    .slim-rail, .menu-overlay, .header-right, .peeker-stage, .lightbox, .train-stage { display: none !important; }
     .container, .header-bar { width: 100%; padding-left: 0; }
     .band-dark { background: #fff; color: #000; }
     .project-card h3, .project-desc, .intro-statement { color: #000; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
+    * { transition: none !important; animation: none !important; }
     html { scroll-behavior: auto; }
+    .hero-stage, .train-stage { height: auto; }
+    .hero-sticky, .train-sticky { position: static; height: auto; }
   }
 </style>
 </head>
@@ -928,6 +847,7 @@
 
   <div class="menu-links">
     <button class="menu-link" data-menu-target="about">About &amp; Honors</button>
+    <button class="menu-link" data-menu-target="train">The Math &amp; Code Express</button>
     <button class="menu-link" data-menu-target="work">Research &amp; Projects</button>
     <button class="menu-link" data-menu-target="speaking">Speaking &amp; Endorsements</button>
     <button class="menu-link" data-menu-target="credentials">Academic Record</button>
@@ -940,32 +860,70 @@
   </div>
 </div>
 
-<!-- 01 HERO (Creamy White) -->
-<section id="start" class="band-cream hero-sec" data-band="cream">
-  <header class="header-bar">
-    <button class="wordmark-btn" data-target="start" aria-label="Back to top">
-      <svg width="110" height="30" viewBox="0 0 110 30">
-        <path id="wavyDark" d="M4,18 Q28,6 55,16 T106,14" fill="none"/>
-        <text font-family="Lato, sans-serif" font-weight="700" font-size="16" letter-spacing="4" fill="#252222">
-          <textPath href="#wavyDark" startOffset="4%">IRFAN</textPath>
-        </text>
-      </svg>
-    </button>
-    <div class="header-right">
-      <a class="top-link" href="./assets/Resume_IRFAN.pdf" download>CV PDF</a>
-      <a class="top-link" href="https://github.com/IpansLab" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <button class="menu-trigger" id="openMenuBtn">Menu</button>
-    </div>
-  </header>
+<!-- 01 STICKY PLAYFUL HERO (Creamy White) -->
+<section id="start" class="band-cream hero-stage" data-band="cream">
+  <div class="hero-sticky">
+    <header class="header-bar">
+      <button class="wordmark-btn" id="logoEasterEgg" title="Click for math sparks!" aria-label="Irfan wordmark">
+        <svg width="110" height="30" viewBox="0 0 110 30">
+          <path id="wavyDark" d="M4,18 Q28,6 55,16 T106,14" fill="none"/>
+          <text font-family="Lato, sans-serif" font-weight="700" font-size="16" letter-spacing="4" fill="#252222">
+            <textPath href="#wavyDark" startOffset="4%">IRFAN</textPath>
+          </text>
+        </svg>
+      </button>
+      <div class="header-right">
+        <a class="top-link" href="./assets/Resume_IRFAN.pdf" download>CV PDF</a>
+        <a class="top-link" href="https://github.com/IpansLab" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <button class="menu-trigger" id="openMenuBtn">Menu</button>
+      </div>
+    </header>
 
-  <div class="hero-center">
-    <h1 class="hero-title">Rigorous Math.<br>Real Impact.</h1>
-    <p class="hero-sub">Muhammad Irfan Bin Amran &middot; Mathematical Sciences &middot; UiTM Shah Alam</p>
-    <button class="hero-cue" data-target="work">Explore selected research &darr;</button>
+    <div class="hero-center">
+      <h1 class="hero-title">Rigorous Math.<br>Real Impact.</h1>
+
+      <!-- Hand-drawn crimson swoosh & splatter scrubbed on scroll -->
+      <div class="swoosh-wrap" aria-hidden="true">
+        <svg viewBox="0 0 460 44" width="100%" height="44">
+          <path id="heroSwoosh" d="M18,22 Q145,4 280,20 T430,15" fill="none" stroke="#e11d48" stroke-width="5" stroke-linecap="round" stroke-dasharray="460" stroke-dashoffset="320"/>
+          <g id="heroSplatter" opacity="0.25" fill="#e11d48">
+            <circle cx="436" cy="14" r="5"/>
+            <circle cx="448" cy="22" r="2.5"/>
+            <circle cx="424" cy="30" r="2.8"/>
+            <circle cx="445" cy="7" r="2"/>
+          </g>
+        </svg>
+      </div>
+
+      <p class="hero-sub">Muhammad Irfan Bin Amran &middot; Mathematical Sciences &middot; UiTM Shah Alam</p>
+      <button class="hero-cue" data-target="about">Scroll to see the journey &darr;</button>
+
+      <!-- Cheeky Sketchy Hero Dino holding chalk -->
+      <div class="hero-dino-box" id="heroDino" aria-hidden="true">
+        <svg viewBox="0 0 150 135" width="100%" height="100%">
+          <!-- Tail & Body -->
+          <path d="M108,118 C126,116 142,100 136,88 C128,96 114,104 102,102" fill="#252222"/>
+          <path d="M48,125 C46,84 62,48 92,46 C110,45 120,62 114,125 Z" fill="#252222"/>
+          <!-- Snout / Head -->
+          <path d="M36,56 C30,30 56,14 90,16 C114,18 122,34 114,52 L68,58 C54,60 40,62 36,56 Z" fill="#252222"/>
+          <!-- Cheeky Grin Teeth -->
+          <path d="M44,55 L49,61 L54,56 L59,61 L64,56" fill="none" stroke="#f7f7ef" stroke-width="2" stroke-linecap="round"/>
+          <!-- Eye -->
+          <circle cx="72" cy="34" r="7.5" fill="#f7f7ef"/>
+          <circle class="dino-eye-blink" cx="70" cy="34" r="3.6" fill="#252222"/>
+          <!-- Tiny Arm holding crimson chalk -->
+          <path d="M52,82 L32,88 L36,94" fill="none" stroke="#252222" stroke-width="6" stroke-linecap="round"/>
+          <rect x="20" y="84" width="14" height="5" rx="2" transform="rotate(-22 27 86)" fill="#e11d48"/>
+          <!-- Floating tiny math sparks -->
+          <text x="10" y="34" font-family="Lora, serif" font-size="15" font-weight="700" fill="#e11d48">&pi;</text>
+          <text x="126" y="36" font-family="Lora, serif" font-size="14" font-weight="700" fill="#252222">&sum;</text>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- 02 ABOUT & METRICS (Rich Black) -->
+<!-- 02 ABOUT & PARALLAX INSTITUTION CLOUD (Rich Black) -->
 <section id="about" class="band-dark intro-sec" data-band="dark">
   <div class="container">
     <p class="intro-statement">
@@ -997,14 +955,104 @@
       </div>
     </div>
 
-    <div class="inst-strip">
-      <span>UiTM Shah Alam</span>
-      <span>UiTM Perak</span>
-      <span>KPT Malaysia</span>
-      <span>INSPEM UPM</span>
-      <span>UTM MIMMC</span>
-      <span>UMBJM Indonesia</span>
-      <span>Folding@home</span>
+    <!-- Multi-Layer Parallax Institution Cloud -->
+    <div class="parallax-cloud" id="parallaxCloud">
+      <div class="cloud-layer l1" data-speed="0.16">
+        <span>UiTM Shah Alam</span>
+        <span>KPT Festival of IDEA</span>
+        <span>INSPEM UPM</span>
+      </div>
+      <div class="cloud-layer l2" data-speed="-0.10">
+        <span>UiTM Perak</span>
+        <span>UTM MIMMC 2026</span>
+        <span>UMBJM Indonesia</span>
+        <span>WOU INNOVATEX</span>
+      </div>
+      <div class="cloud-layer l3" data-speed="0.22">
+        <span>Washington Univ. Folding@home</span>
+        <span>MASMED MyENT</span>
+        <span>SMK Pendidikan Khas Setapak</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUN ELEMENT 3: THE MATH & CODE EXPRESS TRAIN (Creamy White Sticky Scroll) -->
+<section id="train" class="band-cream train-stage" data-band="cream">
+  <div class="train-sticky">
+    <p class="train-statement">
+      A versatile toolkit built across pure mathematics, scientific code, hardware systems, and inclusive education.
+    </p>
+
+    <div class="train-viewport" aria-label="Scroll-animated Math and Code Express train">
+      <div class="train-track-line"></div>
+      <div class="train-runner" id="trainRunner">
+        <svg viewBox="0 0 1120 132" width="1120" height="132">
+          <!-- Puffing Math Steam above chimney -->
+          <text class="steam-sym" x="72" y="28" font-family="Lora, serif" font-size="18" font-weight="700" fill="#252222">&pi;</text>
+          <text class="steam-sym d2" x="96" y="20" font-family="Lora, serif" font-size="17" font-weight="700" fill="#e11d48">&sum;</text>
+          <text class="steam-sym d3" x="118" y="30" font-family="Lora, serif" font-size="18" font-weight="700" fill="#252222">&int;</text>
+
+          <!-- Locomotive Cab -->
+          <g fill="none" stroke="#252222" stroke-width="2.5" stroke-linejoin="round">
+            <path d="M36,104 L46,84 L62,84 L62,56 L112,56 L112,38 L166,38 L166,104 Z" fill="#252222"/>
+            <rect x="70" y="34" width="14" height="22" fill="#252222"/>
+            <rect x="122" y="48" width="28" height="20" rx="3" fill="#f7f7ef"/>
+            <text x="72" y="88" font-family="Lato, sans-serif" font-weight="700" font-size="10" letter-spacing="1.5" fill="#f7f7ef" stroke="none">IRFAN EXP.</text>
+          </g>
+
+          <!-- Coupler lines -->
+          <line x1="166" y1="92" x2="188" y2="92" stroke="#252222" stroke-width="3"/>
+          <line x1="338" y1="92" x2="358" y2="92" stroke="#252222" stroke-width="3"/>
+          <line x1="508" y1="92" x2="528" y2="92" stroke="#252222" stroke-width="3"/>
+          <line x1="678" y1="92" x2="698" y2="92" stroke="#252222" stroke-width="3"/>
+          <line x1="848" y1="92" x2="868" y2="92" stroke="#252222" stroke-width="3"/>
+
+          <!-- Coach 1: Python · FastAPI -->
+          <g transform="translate(188, 0)">
+            <rect x="0" y="48" width="150" height="54" rx="8" fill="#f7f7ef" stroke="#252222" stroke-width="2.5"/>
+            <text x="75" y="79" text-anchor="middle" font-family="Lora, serif" font-size="15" font-weight="600" fill="#252222">Python &middot; FastAPI</text>
+          </g>
+
+          <!-- Coach 2: MATLAB · Fuzzy -->
+          <g transform="translate(358, 0)">
+            <rect x="0" y="42" width="150" height="60" rx="22" fill="#0b474c" stroke="#252222" stroke-width="2.5"/>
+            <text x="75" y="77" text-anchor="middle" font-family="Lora, serif" font-size="15" font-weight="600" fill="#f7f7ef">MATLAB &middot; Fuzzy</text>
+          </g>
+
+          <!-- Coach 3: Hilbert Spaces -->
+          <g transform="translate(528, 0)">
+            <rect x="0" y="46" width="150" height="56" rx="6" fill="#252222" stroke="#252222" stroke-width="2.5"/>
+            <text x="75" y="79" text-anchor="middle" font-family="Lora, serif" font-size="15" font-weight="600" fill="#f7f7ef">Hilbert Spaces</text>
+          </g>
+
+          <!-- Coach 4: Quant · SQL · R -->
+          <g transform="translate(698, 0)">
+            <rect x="0" y="48" width="150" height="54" rx="8" fill="#6d69c5" stroke="#252222" stroke-width="2.5"/>
+            <text x="75" y="79" text-anchor="middle" font-family="Lora, serif" font-size="15" font-weight="600" fill="#f7f7ef">Quant &middot; SQL &middot; R</text>
+          </g>
+
+          <!-- Coach 5: MathAble & Hardware -->
+          <g transform="translate(868, 0)">
+            <rect x="0" y="46" width="170" height="56" rx="8" fill="#f7f7ef" stroke="#252222" stroke-width="2.5"/>
+            <text x="85" y="79" text-anchor="middle" font-family="Lora, serif" font-size="15" font-weight="600" fill="#252222">Braille &amp; Hardware</text>
+          </g>
+
+          <!-- Spinning Wheels (rotated via JS scroll) -->
+          <g class="wheel" transform="translate(82,110)"><circle r="13" fill="#252222"/><circle r="5" fill="#f7f7ef"/><line x1="-10" y1="0" x2="10" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(136,110)"><circle r="13" fill="#252222"/><circle r="5" fill="#f7f7ef"/><line x1="-10" y1="0" x2="10" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(220,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(304,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(390,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(474,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(560,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(644,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(730,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(814,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(902,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+          <g class="wheel" transform="translate(1004,111)"><circle r="11" fill="#252222"/><circle r="4" fill="#f7f7ef"/><line x1="-8" y1="0" x2="8" y2="0" stroke="#f7f7ef" stroke-width="2"/></g>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -1067,13 +1115,12 @@
   </div>
 </section>
 
-<!-- 04 RESEARCH & SELECTED WORK (Rich Black — Simple Summaries Only) -->
+<!-- 04 RESEARCH & SELECTED WORK (Rich Black — Simple Summaries + Springy Arrows) -->
 <section id="work" class="band-dark work-sec" data-band="dark">
   <div class="container">
     <h2 class="work-intro">Here are a few things I've researched and built recently</h2>
 
     <div class="work-grid">
-      <!-- 1. FYP -->
       <article class="project-card">
         <div class="project-thumb">
           <img src="./assets/research_desk_fyp.jpg" loading="lazy" alt="Research workspace with Fourier notes and Hilbert space fixed-point literature" data-caption="Final Year Thesis Workspace — Split Feasibility &amp; Split Equality Fixed-Point Algorithms in Hilbert Spaces">
@@ -1085,7 +1132,6 @@
         <div class="project-tags">Functional Analysis &middot; Hilbert Spaces &middot; UiTM Final Year Project</div>
       </article>
 
-      <!-- 2. MathAble -->
       <article class="project-card">
         <div class="project-thumb">
           <img src="./assets/foi_2026_grant.jpg" loading="lazy" alt="Receiving RM5,000 Naib Johan R&amp;D grant cheque at Festival of IDEA Putrajaya 2026" data-caption="2nd Place Open Category &amp; RM5,000 R&amp;D Matching Grant — Festival of IDEA Putrajaya 2026">
@@ -1095,10 +1141,12 @@
           Awarded 2nd Place (Open Category) at Festival of IDEA Putrajaya 2026 with a RM5,000 KPT R&amp;D Matching Grant and the Emerging STEAM Innovation Award at WOU INNOVATEX 2026. Encodes algebra onto tactile Braille cards paired with an iOS Swift &amp; Web PWA NFC audio companion.
         </p>
         <div class="project-tags">RM5,000 KPT R&amp;D Grant &middot; Tactile Braille &middot; Inclusive STEAM</div>
-        <a class="project-link" href="https://github.com/IpansLab/kad-braille" target="_blank" rel="noopener noreferrer">Take a Look (Kad Braille Repo) &rarr;</a>
+        <a class="project-link" href="https://github.com/IpansLab/kad-braille" target="_blank" rel="noopener noreferrer">
+          Take a Look
+          <svg class="spring-arrow" viewBox="0 0 36 16"><path d="M2,8 Q16,5 30,8 M24,3 L32,8 L24,13"/></svg>
+        </a>
       </article>
 
-      <!-- 3. SafeRange (Teal Showcase Panel like Ollivere Goozby) -->
       <article class="project-card">
         <div class="project-thumb">
           <div class="showcase-panel teal">
@@ -1112,10 +1160,12 @@
           Four-phase routing model combining empirical PlugShare, EVKX, and CarsGuide datasets with multi-server <i>M</i>/<i>M</i>/<i>c</i> charging queue predictions, Mamdani fuzzy optimization in MATLAB, and behavioral nudges delivered through a Python/Streamlit interface.
         </p>
         <div class="project-tags">Queueing Theory &middot; Fuzzy Optimization &middot; Python + MATLAB</div>
-        <a class="project-link" href="https://github.com/IpansLab/SafeRange-MIMMC2026-Team-22" target="_blank" rel="noopener noreferrer">Learn More on GitHub &rarr;</a>
+        <a class="project-link" href="https://github.com/IpansLab/SafeRange-MIMMC2026-Team-22" target="_blank" rel="noopener noreferrer">
+          Learn More
+          <svg class="spring-arrow" viewBox="0 0 36 16"><path d="M2,8 Q16,5 30,8 M24,3 L32,8 L24,13"/></svg>
+        </a>
       </article>
 
-      <!-- 4. Antigravity_Stocks (Indigo Showcase Panel like Ollivere Reflection) -->
       <article class="project-card">
         <div class="project-thumb">
           <div class="showcase-panel indigo">
@@ -1129,10 +1179,12 @@
           Quantitative NVIDIA (<code>NVDA</code>) tracker uniting a 5-domain factor engine (institutional 13F/Form 4 flows, macro indices, overnight futures, technicals, and news sentiment), 2,000-path Jump-Diffusion conformal intervals, and Online Ridge SGD calibration automated via GitHub Actions.
         </p>
         <div class="project-tags">Quantitative Finance &middot; FastAPI &middot; Online Ridge SGD &middot; SQLite</div>
-        <a class="project-link" href="https://github.com/IpansLab/Antigravity_Stocks" target="_blank" rel="noopener noreferrer">Take a Look on GitHub &rarr;</a>
+        <a class="project-link" href="https://github.com/IpansLab/Antigravity_Stocks" target="_blank" rel="noopener noreferrer">
+          Take a Look
+          <svg class="spring-arrow" viewBox="0 0 36 16"><path d="M2,8 Q16,5 30,8 M24,3 L32,8 L24,13"/></svg>
+        </a>
       </article>
 
-      <!-- 5. PC & Laptop Service -->
       <article class="project-card">
         <div class="project-thumb">
           <img src="./assets/pc_service_work.jpg" loading="lazy" alt="Muhammad Irfan performing laptop motherboard diagnostics and thermal servicing" data-caption="MASMED MyENT Registered IT Venture — Motherboard Thermal Servicing &amp; Hardware Upgrades" style="object-position:center top;">
@@ -1144,7 +1196,6 @@
         <div class="project-tags">MASMED MyENT Registered &middot; 3+ Years Active &middot; Systems Hardware</div>
       </article>
 
-      <!-- 6. Math Education & Folding@home -->
       <article class="project-card">
         <div class="project-thumb">
           <img src="./assets/math_educator.jpg" loading="lazy" alt="Muhammad Irfan facilitating a mathematics workshop" data-caption="Mathematics Education &amp; Peer-Mentorship Leadership" style="object-position:center 25%;">
@@ -1159,13 +1210,12 @@
   </div>
 </section>
 
-<!-- 05 SPEAKING & ENDORSEMENTS (Creamy White — Staggered 2-Column) -->
+<!-- 05 SPEAKING, ENDORSEMENTS & OPPOSITE-SCROLLING HIGHLIGHTS RIBBON (Creamy White) -->
 <section id="speaking" class="band-cream speaking-sec" data-band="cream">
   <div class="container">
     <p class="section-kicker" style="margin-bottom:76px;">Speaking &amp; Academic Endorsements</p>
 
     <div class="stagger-grid">
-      <!-- Left Column -->
       <div>
         <div class="quote-block">
           <p class="quote-text">
@@ -1185,7 +1235,6 @@
         </div>
       </div>
 
-      <!-- Right Staggered Column -->
       <div class="stagger-col-right">
         <div class="quote-block">
           <p class="quote-text">
@@ -1204,6 +1253,24 @@
           </p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Fun Element 6: Two Opposite-Scrolling Highlights Rows -->
+  <div class="ribbon-wrap" id="ribbonWrap">
+    <div class="ribbon-row" id="ribbonRow1">
+      <div class="ribbon-card"><div class="rc-tag">Academic Excellence</div><p>3.99 Diploma CGPA &middot; 5&times; Dean's List &amp; Vice Chancellor's Award at UiTM Tapah.</p></div>
+      <div class="ribbon-card"><div class="rc-tag">National R&amp;D Grant</div><p>Secured RM5,000 KPT R&amp;D Matching Grant &amp; 2nd Place at Festival of IDEA 2026.</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Math Olympiad</div><p>Placed Top 51 Nationally in Olimpiad Matematik Universiti Malaysia 2026.</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Biophysical Compute</div><p>Top 100 Globally in Folding@home protein simulations under Team Pewds (480k+ WUs).</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Best Graduate</div><p>Recipient of Anugerah Graduan Terbaik Khas UiTM Perak Branch 2025.</p></div>
+    </div>
+    <div class="ribbon-row" id="ribbonRow2" style="margin-left:-180px;">
+      <div class="ribbon-card"><div class="rc-tag">International Talk</div><p>Invited Speaker at Universitas Muhammadiyah Banjarmasin, Indonesia (Aug 2026).</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Entrepreneurship</div><p>3+ years running a MASMED MyENT registered laptop &amp; PC optimization venture.</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Peer Mentorship</div><p>Directed "The Ultimate of Calculus" lifting first-test recovery rates.</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Institutional Delegate</div><p>UiTM Representative at Meet &amp; Greet with Chief Justice of Malaysia, Putrajaya.</p></div>
+      <div class="ribbon-card"><div class="rc-tag">Quantitative Finance</div><p>Built Antigravity_Stocks: 2,000-path NVDA Jump-Diffusion simulator ($6.79 MAE).</p></div>
     </div>
   </div>
 </section>
@@ -1250,7 +1317,7 @@
   </div>
 </section>
 
-<!-- 07 CONTACT CTA + PEEKING MASCOT + FOOTER -->
+<!-- 07 CONTACT CTA + EXPRESSIVE PEEKING DINO MASCOT + FOOTER -->
 <section id="contact" class="band-cream cta-sec" data-band="cream">
   <div class="container">
     <p class="cta-lead">Open to PhD supervision &amp; research grant collaborations for 2027.</p>
@@ -1263,12 +1330,32 @@
     </div>
   </div>
 
-  <!-- Minimalist Peeking Character Eyes (homage to ollivere.co) -->
-  <div class="peeker-wrap" aria-hidden="true">
-    <div class="peeker-head" id="peekerHead">
-      <div class="eyeball"><div class="pupil"></div></div>
-      <div class="eyeball"><div class="pupil"></div></div>
-    </div>
+  <!-- Fun Element 7: Peeking Sketchy Dino with Cursor-Tracking Eyes, Wagging Tail & Click Quips -->
+  <div class="peeker-stage">
+    <div class="dino-bubble" id="dinoBubble">No nonsense, just math.</div>
+    <button class="peeker-dino-btn" id="peekerDinoBtn" title="Click me!" aria-label="Interactive Dino mascot">
+      <svg viewBox="0 0 260 155" width="240" height="144">
+        <!-- Wagging Tail -->
+        <path class="dino-tail" d="M188,155 C215,148 242,118 232,88 C222,102 204,122 184,126 Z" fill="#252222"/>
+        <!-- Back Spikes -->
+        <polygon points="154,68 172,56 164,80" fill="#252222"/>
+        <polygon points="164,90 184,82 172,106" fill="#252222"/>
+        <!-- Body & Neck -->
+        <path d="M72,155 C72,102 82,42 126,38 C156,36 174,64 172,155 Z" fill="#252222"/>
+        <!-- Snout -->
+        <path d="M52,72 C46,36 86,20 132,24 C162,27 170,52 152,74 L74,80 C60,82 53,78 52,72 Z" fill="#252222"/>
+        <!-- Playful Tooth Grin -->
+        <path d="M62,76 L67,83 L73,77 L79,83 L85,76" fill="none" stroke="#f7f7ef" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- Paws gripping footer top edge -->
+        <ellipse cx="86" cy="148" rx="14" ry="8" fill="#252222" stroke="#f7f7ef" stroke-width="2"/>
+        <ellipse cx="154" cy="148" rx="14" ry="8" fill="#252222" stroke="#f7f7ef" stroke-width="2"/>
+        <!-- Cursor-tracking Eyes -->
+        <circle cx="96" cy="48" r="12" fill="#f7f7ef"/>
+        <circle cx="126" cy="48" r="12" fill="#f7f7ef"/>
+        <circle class="pupil" id="pupL" cx="96" cy="48" r="5.5" fill="#252222"/>
+        <circle class="pupil" id="pupR" cx="126" cy="48" r="5.5" fill="#252222"/>
+      </svg>
+    </button>
   </div>
 </section>
 
@@ -1290,7 +1377,7 @@
       <div class="footer-col">
         <h4>This Site</h4>
         <button data-target="about">About &amp; Honors</button>
-        <button data-target="focus">Research Focus</button>
+        <button data-target="train">Math &amp; Code Express</button>
         <button data-target="work">Selected Work</button>
         <button data-target="credentials">Academic Record</button>
       </div>
@@ -1314,7 +1401,7 @@
 
     <div class="copyright-line">
       <span>&copy; 2026 Muhammad Irfan Bin Amran. All rights reserved.</span>
-      <span>Inspired by editorial simplicity.</span>
+      <span>Tip: click the wavy logo or the Dino above!</span>
     </div>
   </div>
 </footer>
@@ -1338,9 +1425,7 @@
   }
 
   document.querySelectorAll('[data-target]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      scrollToId(btn.getAttribute('data-target'));
-    });
+    btn.addEventListener('click', function() { scrollToId(btn.getAttribute('data-target')); });
   });
 
   // Full-Screen Menu Overlay
@@ -1354,37 +1439,167 @@
     });
   });
 
-  // Slim Rail Scroll Spy + Adaptive Dark/Cream Contrast
+  // Wordmark Click Easter Egg (math symbol sparks)
+  var syms = ['π', '∑', '∫', '∞', 'λ', '∂', '✦', '∀'];
+  document.getElementById('logoEasterEgg').addEventListener('click', function(e) {
+    var rect = this.getBoundingClientRect();
+    var ox = rect.left + rect.width / 2;
+    var oy = rect.top + rect.height / 2;
+    for (var i = 0; i < 10; i++) {
+      var s = document.createElement('span');
+      s.className = 'spark-pop';
+      s.textContent = syms[i % syms.length];
+      s.style.left = ox + 'px';
+      s.style.top = oy + 'px';
+      s.style.color = i % 3 === 0 ? '#e11d48' : '#252222';
+      s.style.setProperty('--dx', ((Math.random() - 0.5) * 140).toFixed(0) + 'px');
+      s.style.setProperty('--dy', (Math.random() * 80 - 20).toFixed(0) + 'px');
+      s.style.setProperty('--rot', ((Math.random() - 0.5) * 90).toFixed(0) + 'deg');
+      document.body.appendChild(s);
+      setTimeout((function(el) { return function() { el.remove(); }; })(s), 880);
+    }
+  });
+
+  // Kinetic Scroll Engine (Hero Dino/Swoosh, Parallax Cloud, Skills Train + Wheels, Ribbon Rows, Rail Spy)
   var rail = document.getElementById('slimRail');
   var prog = document.getElementById('railProgress');
   var railBtns = Array.from(document.querySelectorAll('.rail-btn[data-target]'));
-  var sections = Array.from(document.querySelectorAll('section[data-band]'));
+  var spySections = Array.from(document.querySelectorAll('#start,#about,#focus,#work,#speaking,#credentials,#contact'));
   var bands = Array.from(document.querySelectorAll('[data-band]'));
 
-  function onScroll() {
-    var docH = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = docH > 0 ? Math.min(100, Math.max(0, (window.scrollY / docH) * 100)) : 0;
+  var heroStage = document.getElementById('start');
+  var heroSwoosh = document.getElementById('heroSwoosh');
+  var heroSplatter = document.getElementById('heroSplatter');
+  var heroDino = document.getElementById('heroDino');
+
+  var cloudLayers = Array.from(document.querySelectorAll('.cloud-layer'));
+  var parallaxCloud = document.getElementById('parallaxCloud');
+
+  var trainStage = document.getElementById('train');
+  var trainRunner = document.getElementById('trainRunner');
+  var wheels = Array.from(document.querySelectorAll('.wheel'));
+
+  var ribbonWrap = document.getElementById('ribbonWrap');
+  var row1 = document.getElementById('ribbonRow1');
+  var row2 = document.getElementById('ribbonRow2');
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking = false;
+
+  function updateFrame() {
+    ticking = false;
+    var sy = window.scrollY;
+    var vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight - vh;
+
+    // 1. Rail scroll spy & adaptive dark/light contrast
+    var pct = docH > 0 ? Math.min(100, Math.max(0, (sy / docH) * 100)) : 0;
     if (prog) prog.style.height = pct + '%';
 
-    var midY = window.scrollY + window.innerHeight * 0.48;
-    var activeSec = sections[0].id;
-    sections.forEach(function(s) {
-      if (s.offsetTop <= midY) activeSec = s.id;
-    });
-    railBtns.forEach(function(b) {
-      b.classList.toggle('active', b.getAttribute('data-target') === activeSec);
-    });
+    var midY = sy + vh * 0.46;
+    var activeSec = spySections[0].id;
+    spySections.forEach(function(s) { if (s.offsetTop <= midY) activeSec = s.id; });
+    railBtns.forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-target') === activeSec); });
 
     var activeBand = 'cream';
-    bands.forEach(function(b) {
-      if (b.offsetTop <= midY) activeBand = b.getAttribute('data-band');
-    });
+    bands.forEach(function(b) { if (b.offsetTop <= midY) activeBand = b.getAttribute('data-band'); });
     rail.classList.toggle('on-dark', activeBand === 'dark');
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 
-  // Copy Email
+    if (reducedMotion) return;
+
+    // 2. Hero Sticky Progress (0 -> 1)
+    if (heroStage && heroSwoosh && heroDino) {
+      var hSpan = Math.max(1, heroStage.offsetHeight - vh);
+      var hp = Math.min(1, Math.max(0, sy / hSpan));
+      heroSwoosh.style.strokeDashoffset = (320 * (1 - hp)).toFixed(1);
+      if (heroSplatter) heroSplatter.style.opacity = (0.25 + hp * 0.75).toFixed(2);
+      var dx = -hp * 150;
+      var dy = Math.sin(hp * Math.PI * 2) * 8;
+      var rot = -hp * 8;
+      heroDino.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(1) + 'deg)';
+    }
+
+    // 3. Parallax Institution Cloud
+    if (parallaxCloud) {
+      var cr = parallaxCloud.getBoundingClientRect();
+      var delta = (vh * 0.5 - (cr.top + cr.height * 0.5));
+      cloudLayers.forEach(function(layer) {
+        var spd = parseFloat(layer.getAttribute('data-speed')) || 0;
+        layer.style.transform = 'translateY(' + (delta * spd).toFixed(1) + 'px)';
+      });
+    }
+
+    // 4. Math & Code Express Horizontal Train + Rotating Wheels
+    if (trainStage && trainRunner) {
+      var ts = trainStage.offsetTop;
+      var tSpan = Math.max(1, trainStage.offsetHeight - vh);
+      var tp = Math.min(1, Math.max(0, (sy - ts) / tSpan));
+      var vw = window.innerWidth;
+      var startX = vw * 0.52;
+      var endX = -Math.max(520, 1080 - vw * 0.85);
+      var tx = startX + (endX - startX) * tp;
+      trainRunner.style.transform = 'translateX(' + tx.toFixed(1) + 'px)';
+      var wheelDeg = -tp * 1080;
+      wheels.forEach(function(w) {
+        var base = w.getAttribute('data-base') || w.getAttribute('transform');
+        if (!w.getAttribute('data-base')) w.setAttribute('data-base', base);
+        w.setAttribute('transform', base + ' rotate(' + wheelDeg.toFixed(0) + ')');
+      });
+    }
+
+    // 5. Opposite-Scrolling Highlights Ribbon
+    if (ribbonWrap && row1 && row2) {
+      var rr = ribbonWrap.getBoundingClientRect();
+      var rp = Math.min(1, Math.max(0, (vh - rr.top) / (vh + rr.height)));
+      row1.style.transform = 'translateX(' + (-rp * 180).toFixed(1) + 'px)';
+      row2.style.transform = 'translateX(' + (rp * 180).toFixed(1) + 'px)';
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateFrame);
+    }
+  }, { passive: true });
+  updateFrame();
+
+  // Footer Dino Cursor-Tracking Eyes & Click Quips
+  var quips = [
+    'No nonsense, just math.',
+    "Psst... click 'Let\'s work together'!",
+    'CGPA 3.99 certified.',
+    'Ask me about Hilbert spaces!',
+    'Built with zero boring slides.'
+  ];
+  var qIdx = 0;
+  var bubble = document.getElementById('dinoBubble');
+  var bubbleTimer = null;
+
+  document.getElementById('peekerDinoBtn').addEventListener('click', function() {
+    qIdx = (qIdx + 1) % quips.length;
+    bubble.textContent = quips[qIdx];
+    bubble.classList.add('show');
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(function() { bubble.classList.remove('show'); }, 3000);
+  });
+
+  if (!reducedMotion) {
+    var pupils = [document.getElementById('pupL'), document.getElementById('pupR')];
+    document.addEventListener('mousemove', function(e) {
+      pupils.forEach(function(p) {
+        if (!p) return;
+        var r = p.getBoundingClientRect();
+        var cx = r.left + r.width / 2;
+        var cy = r.top + r.height / 2;
+        var ang = Math.atan2(e.clientY - cy, e.clientX - cx);
+        var d = Math.min(4.5, Math.hypot(e.clientX - cx, e.clientY - cy) / 45);
+        p.style.transform = 'translate(' + (Math.cos(ang) * d).toFixed(1) + 'px,' + (Math.sin(ang) * d).toFixed(1) + 'px)';
+      });
+    }, { passive: true });
+  }
+
+  // Copy Email & Lightbox
   var copyBtn = document.getElementById('copyEmailBtn');
   copyBtn.addEventListener('click', function() {
     if (navigator.clipboard) navigator.clipboard.writeText('mirfann202@gmail.com');
@@ -1392,42 +1607,21 @@
     setTimeout(function() { copyBtn.textContent = 'Copy email: mirfann202@gmail.com'; }, 2200);
   });
 
-  // Lightbox
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lbImg');
   var lbCap = document.getElementById('lbCap');
   document.querySelectorAll('img[data-caption]').forEach(function(img) {
     img.addEventListener('click', function() {
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
+      lbImg.src = img.src; lbImg.alt = img.alt;
       lbCap.textContent = img.getAttribute('data-caption');
       lb.classList.add('open');
     });
   });
   document.getElementById('lbClose').addEventListener('click', function() { lb.classList.remove('open'); });
   lb.addEventListener('click', function(e) { if (e.target === lb) lb.classList.remove('open'); });
-
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      overlay.classList.remove('open');
-      lb.classList.remove('open');
-    }
+    if (e.key === 'Escape') { overlay.classList.remove('open'); lb.classList.remove('open'); }
   });
-
-  // Cursor-Tracking Eyes (respects reduced motion)
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var pupils = document.querySelectorAll('.pupil');
-    document.addEventListener('mousemove', function(e) {
-      pupils.forEach(function(p) {
-        var r = p.parentElement.getBoundingClientRect();
-        var cx = r.left + r.width / 2;
-        var cy = r.top + r.height / 2;
-        var ang = Math.atan2(e.clientY - cy, e.clientX - cx);
-        var dist = Math.min(6, Math.hypot(e.clientX - cx, e.clientY - cy) / 35);
-        p.style.transform = 'translate(' + (Math.cos(ang) * dist).toFixed(1) + 'px,' + (Math.sin(ang) * dist).toFixed(1) + 'px)';
-      });
-    }, { passive: true });
-  }
 })();
 </script>
 </body>
