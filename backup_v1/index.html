@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-scale="normal">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Irfan Bin Amran — Mathematical Sciences &amp; Applied AI</title>
+<meta name="description" content="Academic portfolio of Muhammad Irfan Bin Amran (B.Sc. Hons. Mathematics, UiTM): Hilbert-space fixed-point algorithms, M/M/c & fuzzy optimization, quantitative NVDA simulation, and RM5,000 grant-funded MathAble tactile Braille innovation.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Muhammad Irfan Bin Amran — Mathematical Sciences &amp; Applied AI">
+<meta property="og:description" content="PhD &amp; Grant Portfolio: Hilbert-space operator theory, SafeRange M/M/c fuzzy routing, Antigravity_Stocks Jump-Diffusion simulator, and MathAble KPT R&amp;D grant.">
+<meta property="og:url" content="https://ipanslab.github.io">
+<meta property="og:image" content="https://ipanslab.github.io/assets/portrait_convocation.jpg">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF9F5;
+    --surface: #FFFFFF;
+    --surface-alt: #F3F1EA;
+    --ink: #111315;
+    --muted: #525866;
+    --border: #E5E3DC;
+    --accent: #1D4ED8;
+    --accent-soft: #EFF6FF;
+    --gold-bg: #FEF3C7;
+    --gold-ink: #92400E;
+    --gold-border: #FDE68A;
+    --emerald-bg: #ECFDF5;
+    --emerald-ink: #065F46;
+    --rose-bg: #FEF2F2;
+    --rose-ink: #991B1B;
+    --sidebar-w: 196px;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(17, 19, 21, 0.04), 0 10px 28px rgba(17, 19, 21, 0.04);
+  }
+
+  [data-theme="dark"] {
+    --bg: #0D0F12;
+    --surface: #161920;
+    --surface-alt: #1E222B;
+    --ink: #F3F4F6;
+    --muted: #9CA3AF;
+    --border: #262B35;
+    --accent: #60A5FA;
+    --accent-soft: rgba(96, 165, 250, 0.13);
+    --gold-bg: rgba(245, 158, 11, 0.14);
+    --gold-ink: #FCD34D;
+    --gold-border: rgba(245, 158, 11, 0.35);
+    --emerald-bg: rgba(16, 185, 129, 0.14);
+    --emerald-ink: #6EE7B7;
+    --rose-bg: rgba(239, 68, 68, 0.14);
+    --rose-ink: #FCA5A5;
+    --shadow: 0 4px 18px rgba(0, 0, 0, 0.38);
+  }
+
+  [data-scale="large"] { font-size: 112.5%; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.14;
+    color: var(--ink);
+  }
+
+  .serif-em {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    font-size: 1.08em;
+  }
+
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* Ultra-Slim Fixed Left Sidebar */
+  .slim-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-w);
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    padding: 22px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  .brand-mark {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand-initials {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.94rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    animation: pulseDot 2.8s infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.84); }
+  }
+
+  .brand-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .nav-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 16px 0;
+    padding-left: 10px;
+    border-left: 1px solid var(--border);
+  }
+
+  .progress-bar {
+    position: absolute;
+    left: -1.5px;
+    top: 0;
+    width: 2px;
+    height: 0%;
+    background: var(--accent);
+    transition: height 0.15s ease-out;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 9px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.18s ease;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+  }
+
+  .nav-item:hover {
+    color: var(--ink);
+    background: var(--surface-alt);
+    transform: translateX(2px);
+  }
+
+  .nav-item.active {
+    color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+
+  .nav-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.69rem;
+    opacity: 0.8;
+    min-width: 18px;
+  }
+
+  .sidebar-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .control-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .ctrl-btn {
+    flex: 1;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.71rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .ctrl-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .ergo-note {
+    font-size: 0.67rem;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+
+  /* Main Content */
+  .main-wrap {
+    margin-left: var(--sidebar-w);
+    padding: 42px 52px 84px;
+    max-width: 1120px;
+  }
+
+  section.sec {
+    padding: 58px 0;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 24px;
+  }
+
+  section.sec:first-of-type { padding-top: 10px; }
+  section.sec:last-of-type { border-bottom: none; }
+
+  .reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+
+  .reveal.anim-init {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .sec-index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .sec-title { font-size: clamp(1.55rem, 2.5vw, 2.1rem); font-weight: 700; }
+
+  .sec-lead {
+    color: var(--muted);
+    max-width: 70ch;
+    margin-bottom: 28px;
+    font-size: 0.98rem;
+  }
+
+  /* Hero */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.85fr;
+    gap: 38px;
+    align-items: center;
+  }
+
+  .avail-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.73rem;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(2.15rem, 4.2vw, 3.35rem);
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-h1 span.accent-txt { color: var(--accent); }
+
+  .hero-bio {
+    font-size: 1.02rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+    max-width: 60ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 17px;
+    border-radius: 10px;
+    font-size: 0.87rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+    font-family: inherit;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--ink);
+    box-shadow: var(--shadow);
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .portrait-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+  }
+
+  .portrait-card img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 12px;
+    display: block;
+    cursor: zoom-in;
+    transition: transform 0.25s ease;
+  }
+
+  .portrait-card img:hover { transform: scale(1.015); }
+
+  .portrait-cap {
+    padding: 10px 6px 4px;
+    font-size: 0.77rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Metrics Strip */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .metric-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .metric-val { font-family: 'Space Grotesk', sans-serif; font-size: 1.62rem; font-weight: 700; color: var(--ink); line-height: 1.1; }
+  .metric-label { font-size: 0.77rem; color: var(--muted); margin-top: 5px; }
+
+  /* Grids & Cards */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+  .card.peak-gold {
+    border-color: var(--gold-border);
+    background: linear-gradient(180deg, var(--gold-bg) 0%, var(--surface) 38%);
+  }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.69rem;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .tag.gold { background: var(--gold-bg); color: var(--gold-ink); border-color: var(--gold-border); font-weight: 600; }
+  .tag.blue { background: var(--accent-soft); color: var(--accent); border-color: transparent; font-weight: 600; }
+
+  .card h3 { font-size: 1.18rem; margin-bottom: 10px; }
+  .card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 12px; }
+
+  .triad {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    font-size: 0.85rem;
+  }
+
+  .triad div strong { color: var(--ink); }
+
+  .photo-frame {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin: 12px 0;
+    background: var(--surface-alt);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+    transition: transform 0.28s ease;
+  }
+
+  .photo-frame img:hover { transform: scale(1.03); }
+
+  /* Interactive Widgets */
+  .sim-box {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+  }
+
+  .sim-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 0.81rem;
+    font-weight: 600;
+  }
+
+  .slider-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .slider-grp label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.76rem;
+    color: var(--muted);
+    margin-bottom: 5px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .slider-grp input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+  .sim-out {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sim-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+
+  .sim-stat .k { font-size: 0.67rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .sim-stat .v { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-top: 2px; }
+
+  .nudge-banner { padding: 10px 12px; border-radius: 8px; font-size: 0.81rem; font-weight: 500; }
+  .nudge-ok { background: var(--emerald-bg); color: var(--emerald-ink); }
+  .nudge-warn { background: var(--gold-bg); color: var(--gold-ink); }
+  .nudge-crit { background: var(--rose-bg); color: var(--rose-ink); }
+
+  /* Braille Interactive Explorer */
+  .braille-btns { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+
+  .pill-btn {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .pill-btn.active, .pill-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .braille-stage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    align-items: center;
+    padding: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    min-height: 80px;
+  }
+
+  .b-cell-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+  .b-cell {
+    display: grid;
+    grid-template-columns: repeat(2, 9px);
+    grid-template-rows: repeat(3, 9px);
+    gap: 4px;
+    padding: 7px;
+    border-radius: 6px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+  }
+
+  .b-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--border); background: transparent; }
+  .b-dot.on { background: var(--ink); border-color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.25); }
+  .b-char { font-family: 'JetBrains Mono', monospace; font-size: 0.71rem; color: var(--muted); }
+
+  /* Timeline & Quotes */
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; align-items: center; }
+  .timeline { display: grid; gap: 11px; }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    gap: 16px;
+    padding: 15px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    align-items: start;
+  }
+
+  .tl-item.hidden { display: none; }
+  .tl-year { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+
+  .quote-box {
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    background: var(--surface-alt);
+    border-radius: 0 10px 10px 0;
+    font-size: 0.91rem;
+    font-style: italic;
+    margin: 14px 0;
+  }
+
+  .quote-cite { font-style: normal; font-size: 0.77rem; color: var(--muted); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+
+  /* Lightbox & Theory Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 15, 18, 0.82);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    padding: 24px;
+  }
+  .modal-backdrop.open { display: flex; }
+
+  .lightbox-inner {
+    max-width: 900px;
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+
+  .lightbox-inner img {
+    width: 100%;
+    max-height: 74vh;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+    background: #0D0F12;
+  }
+
+  .lightbox-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-top: 12px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .theory-inner {
+    max-width: 720px;
+    width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+
+  .site-footer {
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 980px) {
+    :root { --sidebar-w: 64px; }
+    .brand-mark, .nav-label, .ergo-note { display: none; }
+    .nav-item { justify-content: center; padding: 10px 4px; }
+    .control-row { flex-direction: column; }
+    .main-wrap { padding: 28px 24px 80px; }
+    .hero-grid, .grid-2, .grid-3, .slider-row { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 680px) {
+    .slim-sidebar {
+      top: auto; left: 0; right: 0; bottom: 0;
+      width: 100%; height: 58px;
+      flex-direction: row; align-items: center;
+      padding: 4px 10px;
+      border-right: none; border-top: 1px solid var(--border);
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(10px);
+    }
+    [data-theme="dark"] .slim-sidebar { background: rgba(13, 15, 18, 0.92); }
+    .nav-track { flex-direction: row; margin: 0; padding-left: 0; border-left: none; overflow-x: auto; gap: 2px; }
+    .progress-bar { display: none; }
+    .sidebar-controls { border-top: none; padding-top: 0; flex-direction: row; }
+    .control-row { flex-direction: row; }
+    .main-wrap { margin-left: 0; padding: 20px 16px 86px; }
+    .tl-item { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  @media print {
+    .slim-sidebar, .hero-actions, .filter-bar, .sim-box .slider-row, .braille-btns, .site-footer { display: none !important; }
+    .main-wrap { margin-left: 0; padding: 0; max-width: 100%; }
+    body { background: #fff; color: #000; }
+    .card, .metric-card, .tl-item { box-shadow: none; break-inside: avoid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="slim-sidebar" aria-label="Section navigation">
+  <div>
+    <div class="brand-mark">
+      <div class="brand-initials"><span class="brand-dot"></span> M. IRFAN</div>
+      <div class="brand-sub">Mathematics · PhD Track</div>
+    </div>
+
+    <div class="nav-track">
+      <div class="progress-bar" id="scrollProgress"></div>
+      <button class="nav-item active" data-target="overview"><span class="nav-num">01</span><span class="nav-label">Overview</span></button>
+      <button class="nav-item" data-target="research"><span class="nav-num">02</span><span class="nav-label">Research</span></button>
+      <button class="nav-item" data-target="innovation"><span class="nav-num">03</span><span class="nav-label">MathAble Grant</span></button>
+      <button class="nav-item" data-target="projects"><span class="nav-num">04</span><span class="nav-label">Projects</span></button>
+      <button class="nav-item" data-target="speaking"><span class="nav-num">05</span><span class="nav-label">Speaking</span></button>
+      <button class="nav-item" data-target="credentials"><span class="nav-num">06</span><span class="nav-label">Honors &amp; CV</span></button>
+      <button class="nav-item" data-target="contact"><span class="nav-num">07</span><span class="nav-label">Contact</span></button>
+    </div>
+  </div>
+
+  <div class="sidebar-controls">
+    <div class="control-row">
+      <button class="ctrl-btn" id="themeToggle" title="Toggle Glare-Free Dark Ink Mode (Key: D)" aria-label="Toggle theme">&#9680; Ink</button>
+      <button class="ctrl-btn" id="scaleToggle" title="Toggle Larger Typography" aria-label="Toggle text size">A+</button>
+    </div>
+    <a class="ctrl-btn" href="../assets/Resume_IRFAN.pdf" target="_blank" rel="noopener noreferrer" title="Download Academic CV PDF">CV PDF &#8595;</a>
+    <div class="ergo-note">Keys 1–7 jump sections · D toggles low-glare ink.</div>
+  </div>
+</nav>
+
+<main class="main-wrap">
+
+  <!-- 01 OVERVIEW -->
+  <section id="overview" class="sec">
+    <div class="hero-grid">
+      <div>
+        <div class="avail-pill">Open for PhD Supervision &amp; Research Grants · 2027</div>
+        <h1 class="hero-h1">Rigorous mathematics. <span class="serif-em accent-txt">Human-centered</span> impact.</h1>
+        <p class="hero-bio">
+          I am <strong>Muhammad Irfan Bin Amran</strong>, a Final-Year B.Sc. (Hons.) Mathematics scholar at
+          <strong>Universiti Teknologi MARA (UiTM) Shah Alam</strong>. My work unites pure functional analysis
+          (Hilbert-space fixed-point algorithms), stochastic queueing &amp; fuzzy optimization, quantitative financial simulation,
+          and tactile assistive STEAM engineering.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-jump="research">Explore Research</button>
+          <button class="btn" data-jump="innovation">MathAble RM5k Grant</button>
+          <a class="btn" href="../assets/Resume_IRFAN.pdf" download>Download CV (PDF)</a>
+          <a class="btn" href="https://github.com/IpansLab" target="_blank" rel="noopener noreferrer">GitHub (@IpansLab) &rarr;</a>
+        </div>
+      </div>
+
+      <div class="portrait-card">
+        <img src="../assets/portrait_convocation.jpg" loading="eager" alt="Muhammad Irfan Bin Amran in UiTM convocation regalia" data-caption="Muhammad Irfan Bin Amran — UiTM Diploma in Mathematical Sciences (CGPA 3.99, Vice Chancellor's &amp; Best Graduate Award)">
+        <div class="portrait-cap">
+          <span>Shah Alam &amp; Kota Kinabalu, MY</span>
+          <span class="mono">CDCS249</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-val">3.99</div>
+        <div class="metric-label">Diploma CGPA · Vice Chancellor's &amp; Best Graduate Award (2025)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">3.96</div>
+        <div class="metric-label">B.Sc. (Hons.) Math CGPA · Dean's List &amp; Tokoh Inklusif Finalist</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">RM5,000</div>
+        <div class="metric-label">KPT R&amp;D Matching Grant · 2nd Place Festival of IDEA 2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">Top 51</div>
+        <div class="metric-label">National Finalist · Olimpiad Matematik Universiti Malaysia 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 RESEARCH & MATHEMATICAL MODELLING -->
+  <section id="research" class="sec reveal">
+    <div class="sec-head">
+      <span class="sec-index">02</span>
+      <h2 class="sec-title">Research &amp; Mathematical Modelling</h2>
+    </div>
+    <p class="sec-lead">
+      Structured around real-world constraints: translating infinite-dimensional operator theory, multi-server stochastic processes,
+      and fuzzy inference systems into verifiable decision tools.
+    </p>
+
+    <div class="grid-2">
+      <!-- Case Study A: FYP -->
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag blue">Final Year Thesis · 2026</span>
+          <span class="tag">Functional Analysis</span>
+          <span class="tag">Hilbert Spaces</span>
+        </div>
+        <h3>Split Feasibility &amp; Split Equality Fixed-Point Algorithms</h3>
+        <div class="photo-frame">
+          <img src="../assets/research_desk_fyp.jpg" loading="lazy" alt="Research desk showing Fourier analysis notes, Hilbert space fixed-point literature, and CT image reconstruction paper" data-caption="Undergraduate Thesis Workspace — Split Feasibility &amp; Split Equality Fixed-Point Literature and CT Inverse Reconstruction">
+        </div>
+        <div class="triad">
+          <div><strong>Problem:</strong> Reconstructing signals and medical Computed Tomography (CT) images requires finding <i>x</i>* &isin; <i>C</i> &sub; <i>H</i><sub>1</sub> such that <i>Ax</i>* &isin; <i>Q</i> &sub; <i>H</i><sub>2</sub> across bounded linear operators.</div>
+          <div><strong>Framework:</strong> Iterative CQ and alternating projection algorithms in infinite-dimensional Hilbert spaces, supervised by <em>Prof. Dr. Adem Kilicman</em>.</div>
+        </div>
+
+        <div class="sim-box">
+          <div class="sim-head">
+            <span>CQ Iterative Projection Visualizer</span>
+            <div style="display:flex; gap:6px;">
+              <button class="pill-btn" id="btnFypStep">Step <i>x<sub>n</sub></i></button>
+              <button class="pill-btn active" id="btnFypAuto">Converge</button>
+            </div>
+          </div>
+          <svg id="fypSvg" viewBox="0 0 360 120" width="100%" height="120" role="img" aria-label="Split feasibility iterative projection diagram" style="display:block; background:var(--surface); border-radius:8px; border:1px solid var(--border);"></svg>
+        </div>
+      </article>
+
+      <!-- Case Study B: SafeRange -->
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag blue">MIMMC 2026 · Team MIMMC_22</span>
+          <span class="tag"><i>M</i>/<i>M</i>/<i>c</i> Queueing</span>
+          <span class="tag">MATLAB + Streamlit</span>
+        </div>
+        <h3>SafeRange Mobility Dashboard: Queueing &amp; Fuzzy Routing</h3>
+        <p>
+          Four-phase decision model combining PlugShare, EVKX &amp; CarsGuide telemetry with <i>M</i>/<i>M</i>/<i>c</i> station congestion dynamics (<i>&rho;</i> = <i>&lambda;</i> / <i>c&mu;</i>) and a 27-rule Mamdani Fuzzy Inference System.
+          <a href="https://github.com/IpansLab/SafeRange-MIMMC2026-Team-22" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:600; text-decoration:none; white-space:nowrap;">GitHub Repo &rarr;</a>
+        </p>
+
+        <div class="sim-box" aria-label="Interactive SafeRange Simulator">
+          <div class="sim-head">
+            <span>Interactive <i>M</i>/<i>M</i>/<i>c</i> + Fuzzy Decision Sandbox</span>
+            <span class="mono" style="color:var(--accent)">Live Model</span>
+          </div>
+          <div class="slider-row">
+            <div class="slider-grp">
+              <label for="socSlider"><span>Initial Battery SoC</span><span id="socVal">22%</span></label>
+              <input id="socSlider" type="range" min="10" max="90" value="22">
+            </div>
+            <div class="slider-grp">
+              <label for="lamSlider"><span>Arrival Rate &lambda;</span><span id="lamVal">3.2/hr</span></label>
+              <input id="lamSlider" type="range" min="1" max="5.5" step="0.2" value="3.2">
+            </div>
+          </div>
+          <div class="sim-out">
+            <div class="sim-stat"><div class="k">RDR Range</div><div class="v" id="outRdr">110 km</div></div>
+            <div class="sim-stat"><div class="k">Est. Wait W<sub>q</sub></div><div class="v" id="outWait">24.6 min</div></div>
+            <div class="sim-stat"><div class="k">Fuzzy Score</div><div class="v" id="outFuzzy">48 / 100</div></div>
+          </div>
+          <svg id="routeSvg" viewBox="0 0 360 72" width="100%" height="72" role="img" aria-label="Dynamic EV corridor topology nodes A through E" style="display:block; background:var(--surface); border-radius:8px; border:1px solid var(--border); margin-bottom:10px;"></svg>
+          <div id="outNudge" class="nudge-banner nudge-warn">
+            Phase IV Nudge: Moderate range margin — charge at Station C (Route A &rarr; B &rarr; C &rarr; E).
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Folding@home -->
+    <article class="card" style="margin-top:20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px;">
+      <div style="max-width:68ch;">
+        <div class="tag-row">
+          <span class="tag">Distributed Biophysical Computing</span>
+          <span class="tag">Washington University in St. Louis</span>
+          <span class="tag">Aug 2025 – Present</span>
+        </div>
+        <h3>Folding@home — Protein Dynamics Volunteer</h3>
+        <p style="margin-bottom:0;">
+          Dedicated local compute nodes to distributed molecular dynamics simulations aiding COVID-19 and oncology drug-target research; contributed under <strong>Team Pewds</strong> (Top 100 globally, 480,000+ work units / 99B points milestone).
+        </p>
+      </div>
+      <div class="mono" style="font-size:1.3rem; font-weight:700; color:var(--accent);">Top 100 Global</div>
+    </article>
+  </section>
+
+  <!-- 03 GRANT-FUNDED INNOVATION: MATHABLE -->
+  <section id="innovation" class="sec reveal">
+    <div class="sec-head">
+      <span class="sec-index">03</span>
+      <h2 class="sec-title">Grant-Funded Innovation: MathAble</h2>
+    </div>
+    <p class="sec-lead">
+      Demonstrating national R&amp;D grant stewardship by translating symbolic mathematics into tactile Braille cards and NFC-triggered audio feedback for visually impaired students.
+    </p>
+
+    <article class="card peak-gold">
+      <div class="grid-2" style="align-items:center;">
+        <div>
+          <div class="tag-row">
+            <span class="tag gold">2nd Place Nationally · Open Category</span>
+            <span class="tag gold">RM5,000 R&amp;D Matching Grant (KPT)</span>
+            <span class="tag">Festival of IDEA Putrajaya 2026</span>
+          </div>
+          <h3>MathAble: Tactile Braille Mathematics Game Cards</h3>
+          <p>
+            Mathematics relies heavily on two-dimensional visual notation—creating systemic barriers for visually impaired learners (<em>Murid OKU Penglihatan</em>). Grounded in Dual-Coding and embodied haptic cognition, <strong>MathAble</strong> encodes algebraic operations onto physical tactile Braille game cards.
+          </p>
+          <p>
+            Awarded <strong>Naib Juara (Runner-Up)</strong> at the Ministry of Higher Education's <em>Cabaran Inovasi &amp; Teknologi Kreatif 2026</em>, securing a <strong>RM5,000 IPT R&amp;D Matching Grant</strong>, and winner of the <strong>Emerging STEAM Innovation Award</strong> at <em>WOU INNOVATEX 2026</em>. Paired with the companion <a href="https://github.com/IpansLab/kad-braille" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:600; text-decoration:none;">Kad Braille NFC Audio App</a> (Native iOS Swift + Web PWA).
+          </p>
+
+          <div class="sim-box" style="background:var(--surface);">
+            <div class="sim-head">
+              <span>Tactile 6-Dot Braille &amp; Audio Explorer</span>
+              <button class="pill-btn" id="btnSpeakMath" title="Hear spoken math cue">&#128266; Audio Cue</button>
+            </div>
+            <div class="braille-btns" id="brailleBtns">
+              <button class="pill-btn active" data-expr="3+5=8">3 + 5 = 8</button>
+              <button class="pill-btn" data-expr="2x=10">2x = 10</button>
+              <button class="pill-btn" data-expr="f(x)=x2">f(x) = x&sup2;</button>
+              <button class="pill-btn" data-expr="int">&int; f(x) dx</button>
+            </div>
+            <div class="braille-stage" id="brailleStage" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="photo-frame" style="margin:0;">
+          <img src="../assets/foi_2026_grant.jpg" loading="lazy" alt="Muhammad Irfan Bin Amran receiving the RM5,000 Naib Johan R&D grant mock cheque at Festival of IDEA Putrajaya 2026" data-caption="2nd Place Open Category &amp; RM5,000 R&amp;D Matching Grant — Festival of IDEA Putrajaya 2026 (KPT)" style="height:360px; object-position:center;">
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 04 PERSONAL PROJECTS & VENTURES -->
+  <section id="projects" class="sec reveal">
+    <div class="sec-head">
+      <span class="sec-index">04</span>
+      <h2 class="sec-title">Personal Projects &amp; Technical Ventures</h2>
+    </div>
+    <p class="sec-lead">
+      Independent applied engineering spanning quantitative equity simulation, hardware systems entrepreneurship, and mathematics mentorship.
+    </p>
+
+    <div class="grid-2">
+      <!-- Project 1: Antigravity_Stocks -->
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag blue">Quantitative Finance</span>
+          <span class="tag">FastAPI · Jump-Diffusion</span>
+          <span class="tag">Online Ridge SGD</span>
+        </div>
+        <h3>Antigravity_Stocks: NVDA Multi-Factor &amp; Self-Tuning Simulator</h3>
+        <p>
+          Full-stack quantitative <code>NVDA</code> engine combining a <strong>2,000-path Monte Carlo Jump-Diffusion</strong> simulator (conformal 68%/95% intervals &amp; RiskMetrics EWMA volatility), a 5-domain factor engine (13F/Form 4 Whale flows, macro <code>^VIX</code>/<code>^TNX</code>, overnight futures, RSI/MACD/Volume POC &amp; news sentiment), a 3-tranche Entry Optimizer, and automated <strong>Online Ridge-Regularized SGD</strong> calibration in SQLite via GitHub Actions.
+        </p>
+
+        <div class="sim-out" style="margin-bottom:12px;">
+          <div class="sim-stat"><div class="k">30D Rolling MAE</div><div class="v">$6.79 <span style="font-size:0.7rem; font-weight:500; color:var(--emerald-ink);">(vs $7.03 RW)</span></div></div>
+          <div class="sim-stat"><div class="k">Rolling MAPE</div><div class="v">3.95%</div></div>
+          <div class="sim-stat"><div class="k">Hit Rate (2,486)</div><div class="v">56.4%</div></div>
+        </div>
+
+        <div class="sim-box">
+          <div class="sim-head">
+            <span id="nvdaModeTitle">Jump-Diffusion 68% / 95% Conformal Bands</span>
+            <div style="display:flex; gap:6px;">
+              <button class="pill-btn active" id="btnNvdaForecast">Conformal</button>
+              <button class="pill-btn" id="btnNvdaSent">5 Factors</button>
+            </div>
+          </div>
+          <div class="slider-grp" style="margin-bottom:10px;">
+            <label for="whaleSlider"><span>What-If Whale Block Shock</span><span id="whaleVal">$0M</span></label>
+            <input id="whaleSlider" type="range" min="-500" max="1000" step="100" value="0">
+          </div>
+          <svg id="nvdaSvg" viewBox="0 0 360 130" width="100%" height="130" role="img" aria-label="NVDA Jump-Diffusion conformal forecast and 5-factor weights" style="display:block; background:var(--surface); border-radius:8px; border:1px solid var(--border);"></svg>
+        </div>
+
+        <div style="margin-top:14px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span class="mono" style="font-size:0.74rem; color:var(--muted);">github.com/IpansLab/Antigravity_Stocks</span>
+          <a class="btn" href="https://github.com/IpansLab/Antigravity_Stocks" target="_blank" rel="noopener noreferrer" style="padding:7px 13px; font-size:0.8rem;">View Repository &rarr;</a>
+        </div>
+      </article>
+
+      <!-- Project 2: PC & Laptop Service Business -->
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag gold">MASMED MyENT Registered</span>
+          <span class="tag">3+ Years Active</span>
+          <span class="tag">Hardware Systems</span>
+        </div>
+        <h3>Laptop &amp; PC Hardware Diagnostics &amp; Upgrade Venture</h3>
+        <div class="photo-frame">
+          <img src="../assets/pc_service_work.jpg" loading="lazy" alt="Muhammad Irfan performing hands-on laptop motherboard diagnostics and thermal servicing" data-caption="Hands-on Motherboard Thermal Optimization, Dust Remediation &amp; NVMe/RAM Upgrades (MASMED MyENT Registered IT Venture)" style="object-position:center top;">
+        </div>
+        <div class="triad">
+          <div><strong>Scope:</strong> Hybrid mobile IT venture across Kota Kinabalu &amp; Shah Alam providing motherboard dust remediation, thermal paste optimization, NVMe SSD/RAM upgrades, and budget component consulting.</div>
+          <div><strong>Systems Synergy:</strong> Practical hardware maintenance directly supports sustained local compute for Python, MATLAB, and Folding@home workloads.</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Project 3: Teaching & Mentorship -->
+    <article class="card" style="margin-top:20px;">
+      <div class="grid-2" style="align-items:center;">
+        <div>
+          <div class="tag-row">
+            <span class="tag">Pedagogy &amp; Leadership</span>
+            <span class="tag">AP Calculus AB · GCSE · SPM AddMath</span>
+            <span class="tag">Exco Akademik PERSIK</span>
+          </div>
+          <h3>Mathematics Education &amp; "The Ultimate of Calculus" Mentorship</h3>
+          <p style="margin-bottom:0;">
+            Bilingual (English &amp; Malay) mathematics educator tutoring <strong>AP Calculus AB, GCSE Maths, SPM Additional Mathematics, Pre-Calculus, and University Calculus I</strong>. Previously directed UiTM Tapah's peer-mentorship initiative <em>"The Ultimate of Calculus"</em>, measurably lifting pass rates among students who struggled in mid-semester assessments, alongside Form 4 STEM outreach workshops.
+          </p>
+        </div>
+        <div class="photo-frame" style="margin:0;">
+          <img src="../assets/math_educator.jpg" loading="lazy" alt="Muhammad Irfan facilitating a mathematics workshop with tablet and laptop" data-caption="Facilitating Interactive Mathematics &amp; Peer-Mentorship Sessions" style="height:200px; object-position:center 25%;">
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 05 INTERNATIONAL SPEAKING & INCLUSIVE ADVOCACY -->
+  <section id="speaking" class="sec reveal">
+    <div class="sec-head">
+      <span class="sec-index">05</span>
+      <h2 class="sec-title">International Speaking &amp; Inclusive Advocacy</h2>
+    </div>
+    <p class="sec-lead">
+      Representing inclusive excellence across international lecture halls, special-needs STEM classrooms, and national institutions.
+    </p>
+
+    <div class="grid-2">
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag blue">Invited International Speaker</span>
+          <span class="tag">Aug 2026 · Banjarmasin, Indonesia</span>
+        </div>
+        <h3>Studium Generale — Universitas Muhammadiyah Banjarmasin</h3>
+        <div class="photo-frame">
+          <img src="../assets/umbjm_banner.jpg" loading="lazy" alt="Studium Generale official event banner at Universitas Muhammadiyah Banjarmasin" data-caption="Invited Speaker — Studium Generale, S1 Pendidikan Matematika, Universitas Muhammadiyah Banjarmasin (18 Aug 2026)">
+        </div>
+        <p>
+          Delivered an invited academic lecture titled <em>"Values in Mathematics Education: Embracing Diversity and Inclusion"</em> hosted by S1 Pendidikan Matematika, FKIP UMBJM.
+        </p>
+        <div class="quote-box">
+          "To me, Mathematics is not just about numbers and formulas. It's about thinking systematically to solve complex problems, continually striving, and being brave in facing challenges."
+          <div class="quote-cite">— Lecture Excerpt, UMBJM Studium Generale (18 Aug 2026)</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="tag-row">
+          <span class="tag">STEM4U Panelist · KL</span>
+          <span class="tag">Palace of Justice Delegate</span>
+          <span class="tag">IDM Moderator</span>
+        </div>
+        <h3>Community &amp; Institutional Representation</h3>
+        <div class="photo-frame">
+          <img src="../assets/stem4u_panel.jpg" loading="lazy" alt="Muhammad Irfan Bin Amran speaking on stage as an invited panelist at SMK Pendidikan Khas Setapak" data-caption="Invited Panelist — Program STEM4U, SMK Pendidikan Khas Setapak, Kuala Lumpur (18 Nov 2025)">
+        </div>
+        <ul style="padding-left:18px; font-size:0.88rem; color:var(--muted); display:grid; gap:7px;">
+          <li><strong>Panelist, Program STEM4U</strong> (<em>SMK Pendidikan Khas Setapak, Nov 2025</em>): Inspired students with visual impairments in inclusive STEM pathways.</li>
+          <li><strong>UiTM Student Delegate</strong> (<em>Palace of Justice Putrajaya, Apr 2025</em>): Represented UiTM at the Meet &amp; Greet with the Chief Justice of Malaysia.</li>
+          <li><strong>International Day of Mathematics</strong> (<em>UiTM Shah Alam, 2025 &amp; 2026</em>): Organizing Committee &amp; Bilingual Webinar Moderator (UiTM &times; UNRI &times; UNILA).</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- 06 HONORS, CV & ACADEMIC ENDORSEMENTS -->
+  <section id="credentials" class="sec reveal">
+    <div class="sec-head">
+      <span class="sec-index">06</span>
+      <h2 class="sec-title">Honors, CV &amp; Academic Endorsements</h2>
+    </div>
+
+    <div class="filter-bar" role="group" aria-label="Filter credentials">
+      <button class="pill-btn active" data-filter="all">All Milestones</button>
+      <button class="pill-btn" data-filter="award">Awards &amp; Grants</button>
+      <button class="pill-btn" data-filter="edu">Education</button>
+      <button class="pill-btn" data-filter="olympiad">Competitions</button>
+      <div style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap;">
+        <a class="btn" href="../assets/Resume_IRFAN.pdf" download style="padding:6px 13px; font-size:0.79rem;">Download CV PDF &#8595;</a>
+        <button class="btn" onclick="window.print()" style="padding:6px 13px; font-size:0.79rem;">Print Dossier</button>
+      </div>
+    </div>
+
+    <div class="timeline" id="credTimeline">
+      <div class="tl-item" data-cat="award">
+        <div class="tl-year">2026</div>
+        <div><strong>2nd Place (Naib Juara) &amp; RM5,000 R&amp;D Grant</strong> — Festival of IDEA Putrajaya (KPT), for <em>MathAble</em> Tactile Braille Mathematics Game Cards.</div>
+      </div>
+      <div class="tl-item" data-cat="award">
+        <div class="tl-year">Jun 2026</div>
+        <div><strong>Emerging STEAM Innovation Award</strong> — WOU INNOVATEX 2026, Wawasan Open University, Penang (Digital Penang / MBOT / TAM).</div>
+      </div>
+      <div class="tl-item" data-cat="olympiad">
+        <div class="tl-year">May 2026</div>
+        <div><strong>National Finalist (Top 51 Nationally)</strong> — Olimpiad Matematik Universiti Malaysia 2026 (OMUM), INSPEM, Universiti Putra Malaysia.</div>
+      </div>
+      <div class="tl-item" data-cat="olympiad">
+        <div class="tl-year">2026</div>
+        <div><strong>Malaysia Industrial Mathematical Modelling Challenge (MIMMC 2026)</strong> — Team MIMMC_22, UTM (SafeRange EV/ICEV Queueing &amp; Fuzzy System).</div>
+      </div>
+      <div class="tl-item" data-cat="edu">
+        <div class="tl-year">2025 – Now</div>
+        <div><strong>B.Sc. (Hons.) Mathematics (CDCS249)</strong> — UiTM Shah Alam · CGPA <strong>3.96 / 4.00</strong> · Dean's List · Finalist, <em>Tokoh Inklusif Siswa 2026</em>.</div>
+      </div>
+      <div class="tl-item" data-cat="award">
+        <div class="tl-year">Jul 2025</div>
+        <div><strong>Anugerah Graduan Terbaik Khas (Best Graduate Award) &amp; Vice Chancellor's Award</strong> — UiTM Perak Branch Convocation 2025.</div>
+      </div>
+      <div class="tl-item" data-cat="edu">
+        <div class="tl-year">2022 – 2025</div>
+        <div><strong>Diploma in Mathematical Sciences (CDCS143)</strong> — UiTM Perak Branch, Tapah · CGPA <strong>3.99 / 4.00</strong> · 5&times; Consecutive Dean's List.</div>
+      </div>
+      <div class="tl-item" data-cat="edu">
+        <div class="tl-year">2021</div>
+        <div><strong>Sijil Pelajaran Malaysia (SPM)</strong> — SMK Bandaraya Kota Kinabalu, Sabah · <strong>8As</strong> (Grade A in Mathematics &amp; Additional Mathematics).</div>
+      </div>
+    </div>
+
+    <!-- Official Academic Endorsement & Referees -->
+    <div class="grid-2" style="margin-top:24px;">
+      <article class="card">
+        <div class="tag-row"><span class="tag blue">Official Faculty Attestation</span></div>
+        <h3>Endorsement from Program Coordinator</h3>
+        <div class="quote-box">
+          "Muhammad Irfan bin Amran is an exemplary scholar with top-tier academic achievement and consistent discipline... Despite visual impairment, he demonstrates exceptional perseverance, never treating disability as a barrier to contributing across faculty, national, and international STEM initiatives."
+          <div class="quote-cite">— Dr. Mohd Rijal Ilias, Senior Lecturer &amp; Coordinator (CDCS249), FSKM UiTM Shah Alam</div>
+        </div>
+        <p style="font-size:0.84rem; margin-bottom:0;">
+          <strong>Technical Stack:</strong> Python, MATLAB, R, C++, Maple, SQL (MySQL) · <strong>Languages:</strong> Malay (Native), English (Fluent), French (Intermediate).
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="tag-row"><span class="tag">Academic Referees</span></div>
+        <h3>Verified Institutional Contacts</h3>
+        <div style="display:grid; gap:12px; font-size:0.88rem;">
+          <div>
+            <strong>Prof. Dr. Adem Kilicman</strong><br>
+            <span style="color:var(--muted);">Final Year Project Supervisor · FSKM, UiTM Shah Alam</span><br>
+            <a href="mailto:kilicman@uitm.edu.my" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">kilicman@uitm.edu.my</a>
+          </div>
+          <div>
+            <strong>Dr. Mohd Rijal Ilias</strong><br>
+            <span style="color:var(--muted);">Program Coordinator (CDCS249) · FSKM, UiTM Shah Alam</span>
+          </div>
+          <div>
+            <strong>Pn. Ini Imaina Binti Abdullah</strong><br>
+            <span style="color:var(--muted);">Academic Advisor (CDCS143) · UiTM Perak Branch, Tapah</span><br>
+            <a href="mailto:imaina044@uitm.edu.my" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">imaina044@uitm.edu.my</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 07 CONTACT -->
+  <section id="contact" class="sec reveal">
+    <div class="sec-head">
+      <span class="sec-index">07</span>
+      <h2 class="sec-title">PhD &amp; Grant Collaboration</h2>
+    </div>
+    <article class="card">
+      <p style="max-width:66ch; font-size:0.96rem;">
+        Seeking doctoral research opportunities (2027 intake) and collaborative R&amp;D grants in <strong>Applied Mathematics, Optimization &amp; Fixed-Point Theory, Stochastic/Fuzzy Decision Systems, Quantitative Data Science, and Accessible STEM</strong>.
+      </p>
+      <div class="hero-actions" style="margin-bottom:14px;">
+        <a class="btn btn-primary" href="mailto:mirfann202@gmail.com?subject=PhD%20Supervision%20Inquiry%20-%20Muhammad%20Irfan" target="_blank" rel="noopener noreferrer">Inquire Regarding PhD Supervision</a>
+        <a class="btn" href="mailto:mirfann202@gmail.com?subject=Research%20or%20Grant%20Collaboration%20-%20Muhammad%20Irfan" target="_blank" rel="noopener noreferrer">Discuss Research / Grant</a>
+        <a class="btn" href="https://github.com/IpansLab" target="_blank" rel="noopener noreferrer">GitHub (@IpansLab)</a>
+        <button class="btn" id="copyEmailBtn">Copy Email: mirfann202@gmail.com</button>
+      </div>
+      <div class="mono" style="font-size:0.77rem; color:var(--muted);">
+        Email: mirfann202@gmail.com &nbsp;|&nbsp; GitHub: github.com/IpansLab &nbsp;|&nbsp; Tel: +60 14-281 2105 &nbsp;|&nbsp; Shah Alam &amp; Kota Kinabalu, Malaysia
+      </div>
+    </article>
+
+    <footer class="site-footer">
+      <span>&copy; 2026 Muhammad Irfan Bin Amran · Built for low-glare academic clarity.</span>
+      <button class="pill-btn" id="openTheoryBtn">Design Architecture: 7 Human Cognition Principles</button>
+    </footer>
+  </section>
+
+</main>
+
+<!-- Image Lightbox Modal -->
+<div class="modal-backdrop" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Enlarged photograph">
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-bar">
+      <span id="lightboxCap"></span>
+      <button class="pill-btn" id="closeLightbox">Close (Esc)</button>
+    </div>
+  </div>
+</div>
+
+<!-- Human Cognition UX Modal -->
+<div class="modal-backdrop" id="theoryModal" role="dialog" aria-modal="true" aria-label="Human Cognition Portfolio Architecture">
+  <div class="theory-inner">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+      <h3>Human Perception &amp; Academic UX Principles</h3>
+      <button class="pill-btn" id="closeTheoryBtn">Close</button>
+    </div>
+    <p style="font-size:0.88rem; color:var(--muted); margin-bottom:14px;">
+      This site is structured around seven peer-reviewed principles of human cognition to serve time-constrained PhD supervisors and grant reviewers:
+    </p>
+    <ol style="padding-left:18px; display:grid; gap:9px; font-size:0.86rem; color:var(--muted);">
+      <li><strong style="color:var(--ink);">Dual-Process Theory (Kahneman):</strong> Minimalist typography and empirical hero anchors satisfy fast System 1 evaluation in &lt;3 seconds, unlocking System 2 engagement.</li>
+      <li><strong style="color:var(--ink);">Cognitive Load Theory (Sweller):</strong> The fixed ultra-slim sidebar eliminates navigation friction (extraneous load), dedicating working memory to research depth (germane load).</li>
+      <li><strong style="color:var(--ink);">Dual-Coding &amp; Embodied Cognition (Paivio; Barsalou):</strong> Interactive Hilbert projections, <i>M</i>/<i>M</i>/<i>c</i> simulation, and 6-dot tactile Braille audio reinforce symbolic math with spatial/haptic feedback.</li>
+      <li><strong style="color:var(--ink);">Information Foraging &amp; F-Pattern (Pirolli &amp; Card; Nielsen):</strong> Left-aligned <code>01</code>–<code>07</code> anchors and metric cards align directly with reviewer gaze paths.</li>
+      <li><strong style="color:var(--ink);">Von Restorff &amp; Peak-End Rule:</strong> Quiet monochrome broken selectively by Grant Amber on the RM5,000 award peak and closing faculty endorsement.</li>
+      <li><strong style="color:var(--ink);">Narrative Transportation &amp; Self-Efficacy (Green &amp; Brock; Bandura):</strong> Connects operator theory, quant finance, hardware engineering, and inclusive education into one coherent scholarly arc.</li>
+      <li><strong style="color:var(--ink);">Choice Architecture (Thaler &amp; Sunstein):</strong> Echoes SafeRange Phase IV nudges via pre-framed PhD supervision, grant inquiry, and 1-click PDF dossier actions.</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+(function() {
+  // 1. Navigation, Scroll Spy & Keyboard Shortcuts (1-7, D)
+  function goToSection(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.querySelectorAll('.nav-item[data-target], [data-jump]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      goToSection(btn.getAttribute('data-target') || btn.getAttribute('data-jump'));
+    });
+  });
+
+  var sections = Array.from(document.querySelectorAll('section.sec'));
+  var navItems = Array.from(document.querySelectorAll('.nav-item[data-target]'));
+  var progBar = document.getElementById('scrollProgress');
+
+  function updateScroll() {
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? Math.min(100, Math.max(0, (window.scrollY / docH) * 100)) : 0;
+    if (progBar) progBar.style.height = pct + '%';
+
+    var current = sections[0] ? sections[0].id : 'overview';
+    var offset = window.scrollY + 150;
+    sections.forEach(function(s) {
+      if (s.offsetTop <= offset) current = s.id;
+    });
+    navItems.forEach(function(n) {
+      n.classList.toggle('active', n.getAttribute('data-target') === current);
+    });
+  }
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  // Scroll reveal
+  if ('IntersectionObserver' in window) {
+    var revEls = document.querySelectorAll('.reveal');
+    revEls.forEach(function(el) { el.classList.add('anim-init'); });
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(ent) {
+        if (ent.isIntersecting) {
+          ent.target.classList.add('in-view');
+          io.unobserve(ent.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    revEls.forEach(function(el) { io.observe(el); });
+  }
+
+  // 2. Glare-Free Dark Ink & Scale Toggles
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var scaleBtn = document.getElementById('scaleToggle');
+
+  function toggleTheme() {
+    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    themeBtn.innerHTML = next === 'dark' ? '&#9728; Paper' : '&#9680; Ink';
+  }
+  themeBtn.addEventListener('click', toggleTheme);
+
+  scaleBtn.addEventListener('click', function() {
+    var next = root.getAttribute('data-scale') === 'normal' ? 'large' : 'normal';
+    root.setAttribute('data-scale', next);
+    scaleBtn.textContent = next === 'large' ? 'A-' : 'A+';
+  });
+
+  // 3. Hilbert-Space Split Feasibility CQ Visualizer
+  var fypSvg = document.getElementById('fypSvg');
+  var fypIter = 0;
+  var fypTimer = null;
+  var iterates = [
+    {x: 68, y: 26, qx: 245, qy: 28, lbl: 'x0'},
+    {x: 92, y: 42, qx: 248, qy: 44, lbl: 'x1'},
+    {x: 108, y: 54, qx: 251, qy: 55, lbl: 'x2'},
+    {x: 118, y: 61, qx: 252, qy: 61, lbl: 'x*'}
+  ];
+
+  function drawFyp(stepIdx) {
+    var p = iterates[stepIdx];
+    var trail = iterates.slice(0, stepIdx + 1).map(function(pt) { return pt.x + ',' + pt.y; }).join(' ');
+    fypSvg.innerHTML =
+      '<ellipse cx="116" cy="64" rx="58" ry="38" fill="rgba(29,78,216,0.10)" stroke="#1D4ED8" stroke-width="1.6"/>' +
+      '<ellipse cx="254" cy="64" rx="56" ry="36" fill="rgba(180,83,9,0.10)" stroke="#B45309" stroke-width="1.6"/>' +
+      '<text x="72" y="96" font-size="10" fill="#1D4ED8" font-family="monospace">C in H1</text>' +
+      '<text x="266" y="96" font-size="10" fill="#B45309" font-family="monospace">Q in H2</text>' +
+      '<line x1="' + p.x + '" y1="' + p.y + '" x2="' + p.qx + '" y2="' + p.qy + '" stroke="currentColor" stroke-opacity="0.45" stroke-dasharray="4,3"/>' +
+      '<text x="178" y="36" font-size="9.5" fill="currentColor" opacity="0.7" font-family="monospace">A(x)</text>' +
+      (stepIdx > 0 ? '<polyline points="' + trail + '" fill="none" stroke="#1D4ED8" stroke-width="2"/>' : '') +
+      '<circle cx="' + p.x + '" cy="' + p.y + '" r="4.5" fill="#1D4ED8"/>' +
+      '<circle cx="' + p.qx + '" cy="' + p.qy + '" r="4.5" fill="#B45309"/>' +
+      '<text x="12" y="18" font-size="9.5" fill="currentColor" opacity="0.75" font-family="monospace">CQ Iterate: ' + p.lbl + (stepIdx === 3 ? ' (Converged: Ax* in Q)' : ' -> projecting...') + '</text>';
+  }
+  drawFyp(3);
+
+  document.getElementById('btnFypStep').addEventListener('click', function() {
+    clearInterval(fypTimer);
+    fypIter = (fypIter + 1) % iterates.length;
+    drawFyp(fypIter);
+  });
+
+  document.getElementById('btnFypAuto').addEventListener('click', function() {
+    clearInterval(fypTimer);
+    fypIter = 0;
+    drawFyp(0);
+    fypTimer = setInterval(function() {
+      fypIter++;
+      if (fypIter >= iterates.length) { clearInterval(fypTimer); return; }
+      drawFyp(fypIter);
+    }, 520);
+  });
+
+  // 4. SafeRange M/M/c + Mamdani Fuzzy Simulator & Topology Map
+  var socSlider = document.getElementById('socSlider');
+  var lamSlider = document.getElementById('lamSlider');
+  var routeSvg = document.getElementById('routeSvg');
+
+  function drawRouteMap(mode) {
+    var colC = mode === 'C' ? '#1D4ED8' : '#9CA3AF';
+    var colD = mode === 'D' ? '#065F46' : '#9CA3AF';
+    var wC = mode === 'C' ? 3 : 1.5;
+    var wD = mode === 'D' ? 3 : 1.5;
+    var nodes = [
+      {x:30,y:40,l:'A'}, {x:105,y:40,l:'B'}, {x:185,y:20,l:'C'}, {x:255,y:56,l:'D'}, {x:330,y:40,l:'E'}
+    ];
+    var s = '';
+    s += '<line x1="30" y1="40" x2="105" y2="40" stroke="' + (mode === 'A' ? '#991B1B' : '#1D4ED8') + '" stroke-width="2.5"/>';
+    s += '<polyline points="105,40 185,20 330,40" fill="none" stroke="' + colC + '" stroke-width="' + wC + '"/>';
+    s += '<polyline points="105,40 255,56 330,40" fill="none" stroke="' + colD + '" stroke-width="' + wD + '"/>';
+    nodes.forEach(function(n) {
+      var active = (mode === 'A' && n.l === 'A') || (mode === 'C' && n.l !== 'D') || (mode === 'D' && n.l !== 'C');
+      var fill = active ? (mode === 'A' ? '#991B1B' : (mode === 'C' ? '#1D4ED8' : '#065F46')) : '#6B7280';
+      s += '<circle cx="' + n.x + '" cy="' + n.y + '" r="9" fill="' + fill + '"/>';
+      s += '<text x="' + n.x + '" y="' + (n.y + 3.5) + '" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#fff" font-family="monospace">' + n.l + '</text>';
+    });
+    routeSvg.innerHTML = s;
+  }
+
+  function updateSim() {
+    var soc = parseFloat(socSlider.value);
+    var lam = parseFloat(lamSlider.value);
+    document.getElementById('socVal').textContent = soc + '%';
+    document.getElementById('lamVal').textContent = lam.toFixed(1) + '/hr';
+
+    var rdr = soc * 5.0;
+    var c = 2, mu = 2.9;
+    var rho = Math.min(0.94, lam / (c * mu));
+    var a = lam / mu;
+    var p0 = 1 / (1 + a + (a * a) / (2 * (1 - rho)));
+    var lq = (p0 * a * a * rho) / (2 * Math.pow(1 - rho, 2));
+    var wqMin = (lq / lam) * 60 + 8;
+    var margin = rdr - 85;
+    var score = Math.max(8, Math.min(96, Math.round(
+      0.45 * soc + 0.35 * Math.max(0, Math.min(100, (margin + 20) * 1.1)) + 0.20 * Math.max(0, 100 - wqMin * 1.1)
+    )));
+
+    document.getElementById('outRdr').textContent = rdr.toFixed(0) + ' km';
+    document.getElementById('outWait').textContent = wqMin.toFixed(1) + ' min';
+    document.getElementById('outFuzzy').textContent = score + ' / 100';
+
+    var nudgeEl = document.getElementById('outNudge');
+    if (soc < 18) {
+      nudgeEl.className = 'nudge-banner nudge-crit';
+      nudgeEl.textContent = 'Phase IV Critical Nudge: Insufficient range (' + rdr.toFixed(0) + ' km). Do not depart — charge at Node A.';
+      drawRouteMap('A');
+    } else if (soc < 42 || wqMin > 30) {
+      nudgeEl.className = 'nudge-banner nudge-warn';
+      nudgeEl.textContent = 'Phase IV Nudge: Moderate margin — stop to charge at Station C (Route A -> B -> C -> E) at 100 km/h.';
+      drawRouteMap('C');
+    } else {
+      nudgeEl.className = 'nudge-banner nudge-ok';
+      nudgeEl.textContent = 'Phase IV Optimal Nudge: Healthy SoC & low queue — direct corridor viable (Route A -> B -> D -> E).';
+      drawRouteMap('D');
+    }
+  }
+  socSlider.addEventListener('input', updateSim);
+  lamSlider.addEventListener('input', updateSim);
+  updateSim();
+
+  // 5. MathAble Tactile 6-Dot Braille + Audio Preview
+  var BRAILLE = {
+    '#': [3,4,5,6], '0': [2,4,5], '1': [1], '2': [1,2], '3': [1,4], '5': [1,5], '8': [1,2,5],
+    '+': [2,3,5], '=': [1,2,3,4,5,6], 'x': [1,3,4,6], 'f': [1,2,4],
+    '(': [1,2,3,5,6], ')': [2,3,4,5,6], '^': [3,4,6], 'S': [2,3,4,6], 'd': [1,4,5]
+  };
+  var EXPRS = {
+    '3+5=8': { speech: 'Three plus five equals eight', cells: [['#','num'],['3','3'],['+','+'],['#','num'],['5','5'],['=','='],['#','num'],['8','8']] },
+    '2x=10': { speech: 'Two x equals ten', cells: [['#','num'],['2','2'],['x','x'],['=','='],['#','num'],['1','1'],['0','0']] },
+    'f(x)=x2': { speech: 'f of x equals x squared', cells: [['f','f'],['(','('],['x','x'],[')',')'],['=','='],['x','x'],['^','sup'],['#','num'],['2','2']] },
+    'int': { speech: 'Integral of f of x dx', cells: [['S','int'],['f','f'],['(','('],['x','x'],[')',')'],['d','d'],['x','x']] }
+  };
+  var activeExpr = '3+5=8';
+  var stage = document.getElementById('brailleStage');
+  function renderBraille(key) {
+    activeExpr = key;
+    stage.innerHTML = '';
+    (EXPRS[key].cells || []).forEach(function(pair) {
+      var dots = BRAILLE[pair[0]] || [];
+      var wrap = document.createElement('div');
+      wrap.className = 'b-cell-wrap';
+      wrap.title = 'Dots: ' + (dots.length ? dots.join(',') : 'none');
+      var cell = document.createElement('div');
+      cell.className = 'b-cell';
+      [1,4,2,5,3,6].forEach(function(d) {
+        var dot = document.createElement('span');
+        dot.className = 'b-dot' + (dots.indexOf(d) !== -1 ? ' on' : '');
+        cell.appendChild(dot);
+      });
+      var lbl = document.createElement('span');
+      lbl.className = 'b-char';
+      lbl.textContent = pair[1];
+      wrap.appendChild(cell);
+      wrap.appendChild(lbl);
+      stage.appendChild(wrap);
+    });
+  }
+  document.querySelectorAll('#brailleBtns .pill-btn').forEach(function(b) {
+    b.addEventListener('click', function() {
+      document.querySelectorAll('#brailleBtns .pill-btn').forEach(function(x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      renderBraille(b.getAttribute('data-expr'));
+    });
+  });
+  renderBraille('3+5=8');
+
+  document.getElementById('btnSpeakMath').addEventListener('click', function() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(EXPRS[activeExpr].speech);
+      u.rate = 0.95;
+      window.speechSynthesis.speak(u);
+    }
+  });
+
+  // 6. Antigravity_Stocks NVDA Quant Chart + What-If Whale Shock
+  var nvdaSvg = document.getElementById('nvdaSvg');
+  var nvdaTitle = document.getElementById('nvdaModeTitle');
+  var btnForecast = document.getElementById('btnNvdaForecast');
+  var btnSent = document.getElementById('btnNvdaSent');
+  var whaleSlider = document.getElementById('whaleSlider');
+  var nvdaMode = 'forecast';
+
+  function drawNvda() {
+    var shock = parseFloat(whaleSlider.value);
+    document.getElementById('whaleVal').textContent = (shock >= 0 ? '+$' : '-$') + Math.abs(shock) + 'M';
+    if (nvdaMode === 'forecast') {
+      var shift = (shock / 1000) * 26;
+      var yEnd = Math.max(22, Math.min(106, 66 - shift));
+      var yMid = Math.max(26, Math.min(104, 71 - shift * 0.55));
+      var predPrice = (147.96 * (1 + (shock / 1000) * 0.032)).toFixed(2);
+      nvdaTitle.textContent = 'Jump-Diffusion Conformal Cone ($' + predPrice + ' Target)';
+      nvdaSvg.innerHTML =
+        '<path d="M24,96 L85,82 L145,88 L205,68 L265,' + (yMid - 18) + ' L335,' + (yEnd - 24) + ' L335,' + (yEnd + 24) + ' L265,' + (yMid + 18) + ' L205,86 L145,102 L85,96 L24,104 Z" fill="rgba(29,78,216,0.11)"/>' +
+        '<path d="M205,68 L265,' + (yMid - 10) + ' L335,' + (yEnd - 13) + ' L335,' + (yEnd + 13) + ' L265,' + (yMid + 10) + ' L205,86 Z" fill="rgba(29,78,216,0.19)"/>' +
+        '<polyline points="24,100 85,89 145,95 205,77" fill="none" stroke="#1D4ED8" stroke-width="2.5" stroke-linecap="round"/>' +
+        '<polyline points="205,77 265,' + yMid + ' 335,' + yEnd + '" fill="none" stroke="#B45309" stroke-width="2.5" stroke-dasharray="5,4" stroke-linecap="round"/>' +
+        '<circle cx="205" cy="77" r="4" fill="#1D4ED8"/>' +
+        '<text x="20" y="18" font-size="9" fill="currentColor" opacity="0.72" font-family="monospace">2,000 Jump-Diffusion Paths · 68% / 95% Conformal Bands</text>';
+    } else {
+      nvdaTitle.textContent = 'Calibrated 5-Domain Factor Weights (Ridge SGD)';
+      var bars = [
+        {x:22, h:76, c:'#1D4ED8', l:'Whale', w:'0.43'},
+        {x:88, h:36, c:'#B45309', l:'Macro', w:'0.20'},
+        {x:154, h:30, c:'#065F46', l:'Overnt', w:'0.16'},
+        {x:220, h:22, c:'#6366F1', l:'Tech', w:'0.12'},
+        {x:286, h:17, c:'#64748B', l:'Peers', w:'0.09'}
+      ];
+      var html = '<text x="22" y="18" font-size="9" fill="currentColor" opacity="0.72" font-family="monospace">Online Ridge-Regularized Weights (Sum = 1.00)</text>';
+      bars.forEach(function(b) {
+        html += '<rect x="' + b.x + '" y="' + (104 - b.h) + '" width="44" height="' + b.h + '" rx="4" fill="' + b.c + '" opacity="0.88"/>';
+        html += '<text x="' + (b.x + 8) + '" y="' + (99 - b.h) + '" font-size="9" fill="currentColor" opacity="0.82" font-family="monospace">' + b.w + '</text>';
+        html += '<text x="' + (b.x + 4) + '" y="119" font-size="9" fill="currentColor" opacity="0.65" font-family="monospace">' + b.l + '</text>';
+      });
+      nvdaSvg.innerHTML = html;
+    }
+  }
+  btnForecast.addEventListener('click', function() {
+    nvdaMode = 'forecast'; btnForecast.classList.add('active'); btnSent.classList.remove('active'); drawNvda();
+  });
+  btnSent.addEventListener('click', function() {
+    nvdaMode = 'sentiment'; btnSent.classList.add('active'); btnForecast.classList.remove('active'); drawNvda();
+  });
+  whaleSlider.addEventListener('input', function() { nvdaMode = 'forecast'; btnForecast.classList.add('active'); btnSent.classList.remove('active'); drawNvda(); });
+  drawNvda();
+
+  // 7. Credentials Filter & Copy Email
+  document.querySelectorAll('.filter-bar .pill-btn[data-filter]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-bar .pill-btn[data-filter]').forEach(function(x) { x.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      document.querySelectorAll('#credTimeline .tl-item').forEach(function(item) {
+        item.classList.toggle('hidden', f !== 'all' && item.getAttribute('data-cat') !== f);
+      });
+    });
+  });
+
+  var copyBtn = document.getElementById('copyEmailBtn');
+  copyBtn.addEventListener('click', function() {
+    if (navigator.clipboard) navigator.clipboard.writeText('mirfann202@gmail.com');
+    copyBtn.textContent = 'Copied: mirfann202@gmail.com';
+    setTimeout(function() { copyBtn.textContent = 'Copy Email: mirfann202@gmail.com'; }, 2400);
+  });
+
+  // 8. Lightbox & Cognition Theory Modal
+  var lbModal = document.getElementById('lightboxModal');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbCap = document.getElementById('lightboxCap');
+  var thModal = document.getElementById('theoryModal');
+
+  document.querySelectorAll('img[data-caption]').forEach(function(img) {
+    img.addEventListener('click', function() {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = img.getAttribute('data-caption');
+      lbModal.classList.add('open');
+    });
+  });
+
+  document.getElementById('closeLightbox').addEventListener('click', function() { lbModal.classList.remove('open'); });
+  lbModal.addEventListener('click', function(e) { if (e.target === lbModal) lbModal.classList.remove('open'); });
+
+  document.getElementById('openTheoryBtn').addEventListener('click', function() { thModal.classList.add('open'); });
+  document.getElementById('closeTheoryBtn').addEventListener('click', function() { thModal.classList.remove('open'); });
+  thModal.addEventListener('click', function(e) { if (e.target === thModal) thModal.classList.remove('open'); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'Escape') { lbModal.classList.remove('open'); thModal.classList.remove('open'); }
+    if (e.key === 'd' || e.key === 'D') toggleTheme();
+    var idx = parseInt(e.key, 10);
+    if (idx >= 1 && idx <= 7 && sections[idx - 1]) goToSection(sections[idx - 1].id);
+  });
+})();
+</script>
+</body>
+</html>
